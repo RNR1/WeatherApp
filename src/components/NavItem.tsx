@@ -22,7 +22,7 @@ const Item = styled.li`
 	align-items: center;
 
 	& a {
-		color: #8f5c2c;
+		color: black;
 		text-decoration: none;
 		width: 100%;
 		box-sizing: border-box;
@@ -33,7 +33,7 @@ const Item = styled.li`
 	& a:hover,
 	& a:active,
 	& a.active {
-		color: #40a4c8;
+		color: #056674;
 	}
 
 	@media (min-width: 500px) {

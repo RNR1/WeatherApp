@@ -1,18 +1,23 @@
-import React, { FC, PropsWithChildren } from 'react'
+import React, { FC, PropsWithChildren, useState } from 'react'
 import styled from 'styled-components'
 
 import Navbar from './Navbar'
 import Logo from './Logo'
+import SideDrawer from './SideDrawer'
+import DrawerToggle from './DrawerToggle'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
+	const [open, setOpen] = useState(false)
 	return (
-		<div>
+		<>
+			<SideDrawer open={open} close={() => setOpen(false)} />
 			<Header>
+				<DrawerToggle onClick={() => setOpen((prev) => !prev)} />
 				<Logo />
 				<Navbar />
 			</Header>
 			<main>{children}</main>
-		</div>
+		</>
 	)
 }
 
@@ -32,11 +37,17 @@ const Header = styled.header`
 	box-sizing: border-box;
 	z-index: 90;
 
-	& .Toolbar nav {
+	& nav {
 		height: 100%;
 	}
 
 	& .Logo {
 		height: 80%;
+	}
+
+	@media (max-width: 499px) {
+		& nav {
+			display: none;
+		}
 	}
 `
