@@ -25,6 +25,7 @@ export default Layout
 
 const Main = styled.main`
 	margin: 60px auto;
+	max-width: 960px;
 `
 
 const Header = styled.header`

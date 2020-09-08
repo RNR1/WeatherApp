@@ -8,7 +8,7 @@ const Routes = () => (
 	<Suspense fallback={<div>Loading...</div>}>
 		<Switch>
 			<Route exact to='/' component={Home} />
-			<Route exact to='/favorites' component={Favorites} />
+			<Route to='/favorites' component={Favorites} />
 		</Switch>
 	</Suspense>
 )
