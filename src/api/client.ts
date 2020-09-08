@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
 	AutocompleteResponse,
 	currentConditionResponse,
-	FiveDayForecastResponse
+	FiveDayForecastResponse,
+	GeoPositionResponse
 } from '../models/responses'
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -22,6 +23,10 @@ const API = {
 	fiveDayForecast: (locationKey: string = '21584') =>
 		client.get<FiveDayForecastResponse>(
 			`/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&metric=true`
+		),
+	geoPosition: ({ lat, lon }: { lat: string; lon: string }) =>
+		client.get<GeoPositionResponse>(
+			`/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}, ${lon}`
 		)
 }
 

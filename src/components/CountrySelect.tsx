@@ -31,8 +31,9 @@ export default function CountrySelect() {
 
 	return (
 		<Autocomplete
+			autoComplete={false}
 			id='country-select-demo'
-			style={{ width: 300 }}
+			style={{ width: 300, margin: 'auto' }}
 			options={countries as CountryType[]}
 			classes={{
 				option: classes.option
@@ -42,7 +43,7 @@ export default function CountrySelect() {
 			renderOption={(option) => (
 				<React.Fragment>
 					<span>{countryToFlag(option.code)}</span>
-					{option.label} ({option.code}) +{option.phone}
+					{option.label}
 				</React.Fragment>
 			)}
 			renderInput={(params) => (
