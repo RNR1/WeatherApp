@@ -16,12 +16,16 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 				<Logo />
 				<Navbar />
 			</Header>
-			<main>{children}</main>
+			<Main>{children}</Main>
 		</>
 	)
 }
 
 export default Layout
+
+const Main = styled.main`
+	margin: 60px auto;
+`
 
 const Header = styled.header`
 	height: 56px;
