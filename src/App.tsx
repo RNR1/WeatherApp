@@ -1,11 +1,12 @@
 import React from 'react'
 import Routes from './routes/Routes'
+import Layout from './components/Layout'
 
 function App() {
 	return (
-		<div className='App'>
+		<Layout>
 			<Routes />
-		</div>
+		</Layout>
 	)
 }
 
