@@ -3,23 +3,27 @@ import styled from 'styled-components'
 
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/root/reducer'
 
 const CurrentCondition = () => {
+	const city = useSelector((state: RootState) => state.currentCity)
 	const [favorite, setFavorite] = useState(false)
 	const toggleFavorite = () => setFavorite((prev) => !prev)
+	const { currentCondition } = city!
 	return (
 		<>
 			<Container>
 				<div className='information'>
 					<div className='image'>
 						<img
-							src='https://developer.accuweather.com/sites/default/files/01-s.png'
-							alt='Sunny'
+							src={`https://developer.accuweather.com/sites/default/files/0${currentCondition.icon}-s.png`}
+							alt={currentCondition.description}
 						/>
 					</div>
 					<div>
-						<div>Tel Aviv</div>
-						<div>38&deg; C</div>
+						<div>{city?.name}</div>
+						<div>{currentCondition.celsius}&deg; C</div>
 					</div>
 				</div>
 				<div>
@@ -30,10 +34,9 @@ const CurrentCondition = () => {
 							<FavoriteIcon onClick={toggleFavorite} />
 						)}
 					</span>
-					<span></span>
 				</div>
 			</Container>
-			<WeatherDescription>Scattered Clouds</WeatherDescription>
+			<Description>Scattered Clouds</Description>
 		</>
 	)
 }
@@ -59,6 +62,6 @@ const Container = styled.section`
 	}
 `
 
-const WeatherDescription = styled.h2`
+const Description = styled.h3`
 	text-align: center;
 `

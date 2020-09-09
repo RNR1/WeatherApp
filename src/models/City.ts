@@ -1,8 +1,9 @@
-interface Temperature {
-	iconNumber: number
+export interface Temperature {
+	date: string
+	icon: number
 	description: string
-	Celsius: 30.5
-	Fahrenheit: 87
+	celsius: number
+	fahrenheit: number
 }
 
 export default class City {

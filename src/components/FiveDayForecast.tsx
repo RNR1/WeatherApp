@@ -1,38 +1,33 @@
 import React from 'react'
 import dayjs from 'dayjs'
-import styled from 'styled-components'
 
-import fiveDays from '../data/FiveDayForecast.json'
+import CardGrid, { Card } from '../styles/Cards'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/root/reducer'
 
 const FiveDayForecast = () => {
+	const days = useSelector(
+		(state: RootState) => state.currentCity!.fiveDayForecast
+	)
 	return (
-		<CardGrid>
-			{fiveDays.DailyForecasts.map((day) => (
-				<ForecastCard key={day.EpochDate}>
-					<p>{dayjs(day.Date).format('ddd')}</p>
-					<p>{day.Temperature.Minimum.Value}&deg; C</p>
-				</ForecastCard>
-			))}
-		</CardGrid>
+		<>
+			<h2>Five-day Forecast</h2>
+			<CardGrid>
+				{days?.map((day, i) => (
+					<Card key={i.toString()}>
+						<p>{dayjs(day.date).add(i, 'day').format('ddd')}</p>
+						<div>
+							<img
+								src={`https://developer.accuweather.com/sites/default/files/0${day.icon}-s.png`}
+								alt={day.description}
+							/>
+						</div>
+						<p>{day.celsius}&deg; C</p>
+					</Card>
+				))}
+			</CardGrid>
+		</>
 	)
 }
 
 export default FiveDayForecast
-
-const CardGrid = styled.section`
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-`
-
-const ForecastCard = styled.div`
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 12rem;
-	width: 9rem;
-	border: 3px solid #eee;
-	box-shadow: 2px 2px 2px #eee;
-	margin: 10px;
-`
