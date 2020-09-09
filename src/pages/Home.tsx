@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import CountrySelect from '../components/CountrySelect'
 import CityDetails from '../components/CityDetails'
+import SearchBar from '../components/SearchBar'
 
 const Home = () => {
 	useEffect(() => {
@@ -17,7 +17,7 @@ const Home = () => {
 	}, [])
 	return (
 		<>
-			<CountrySelect />
+			<SearchBar />
 			<CityDetails />
 		</>
 	)
