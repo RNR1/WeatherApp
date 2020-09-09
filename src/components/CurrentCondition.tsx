@@ -5,30 +5,37 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/root/reducer'
+import { transformIcon } from '../utils/dataTransform'
 
 const CurrentCondition = () => {
 	const city = useSelector((state: RootState) => state.currentCity)
-	const [favorite, setFavorite] = useState(false)
+	const [, setFavorite] = useState(false)
 	const toggleFavorite = () => setFavorite((prev) => !prev)
-	const { currentCondition } = city!
+	const {
+		name,
+		isFavorite,
+		currentCondition: { icon, description, celsius }
+	} = city!
 	return (
 		<>
 			<Container>
 				<div className='information'>
 					<div className='image'>
 						<img
-							src={`https://developer.accuweather.com/sites/default/files/0${currentCondition.icon}-s.png`}
-							alt={currentCondition.description}
+							src={`https://developer.accuweather.com/sites/default/files/${transformIcon(
+								icon
+							)}-s.png`}
+							alt={description}
 						/>
 					</div>
 					<div>
-						<div>{city?.name}</div>
-						<div>{currentCondition.celsius}&deg; C</div>
+						<div>{name}</div>
+						<div>{celsius}&deg; C</div>
 					</div>
 				</div>
 				<div>
 					<span>
-						{favorite ? (
+						{isFavorite ? (
 							<FavoriteBorderOutlinedIcon onClick={toggleFavorite} />
 						) : (
 							<FavoriteIcon onClick={toggleFavorite} />
