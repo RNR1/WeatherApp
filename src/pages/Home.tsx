@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import CountrySelect from '../components/CountrySelect'
 import CityDetails from '../components/CityDetails'
+
 const Home = () => {
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
@@ -10,7 +11,8 @@ const Home = () => {
 				console.log(`Longitude: ${coords.longitude}`)
 				console.log(`More or less ${coords.accuracy} meters.`)
 			},
-			(error) => console.log(error)
+			(error) => console.log(error),
+			{ enableHighAccuracy: true }
 		)
 	}, [])
 	return (
