@@ -1,45 +1,49 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined'
-import { useSelector } from 'react-redux'
-import { RootState } from '../store/root/reducer'
+import { RootState, isFavorite } from '../store/root/reducer'
+import { toggleFavorite } from '../store/actions/app'
 
 const CurrentCondition = () => {
 	const city = useSelector((state: RootState) => state.currentCity)
-	const [, setFavorite] = useState(false)
-	const toggleFavorite = () => setFavorite((prev) => !prev)
+	const favorites = useSelector((state: RootState) => state.favoriteCities)
+	const dispatch = useDispatch()
+	const handleFavorite = () => dispatch(toggleFavorite())
 	const {
 		name,
-		isFavorite,
 		currentCondition: { icon, description, celsius }
 	} = city!
+
 	return (
 		<>
-			<Container>
-				<div className='information'>
-					<div className='image'>
-						<img
-							src={`https://developer.accuweather.com/sites/default/files/${icon}-s.png`}
-							alt={description}
-						/>
+			{city && (
+				<Container>
+					<div className='information'>
+						<div className='image'>
+							<img
+								src={`https://developer.accuweather.com/sites/default/files/${icon}-s.png`}
+								alt={description}
+							/>
+						</div>
+						<div>
+							<div>{name}</div>
+							<div>{celsius}&deg; C</div>
+						</div>
 					</div>
 					<div>
-						<div>{name}</div>
-						<div>{celsius}&deg; C</div>
+						<span>
+							{isFavorite(favorites, city) ? (
+								<FavoriteIcon onClick={handleFavorite} />
+							) : (
+								<FavoriteBorderOutlinedIcon onClick={handleFavorite} />
+							)}
+						</span>
 					</div>
-				</div>
-				<div>
-					<span>
-						{isFavorite ? (
-							<FavoriteBorderOutlinedIcon onClick={toggleFavorite} />
-						) : (
-							<FavoriteIcon onClick={toggleFavorite} />
-						)}
-					</span>
-				</div>
-			</Container>
+				</Container>
+			)}
 			<Description>Scattered Clouds</Description>
 		</>
 	)

@@ -43,3 +43,7 @@ export const searchFailed = (payload: Error) => ({
 	type: Types.SEARCH_FAILED,
 	payload: payload.message
 })
+
+export const toggleFavorite = () => ({
+	type: Types.TOGGLE_FAVORITE
+})

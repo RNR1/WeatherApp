@@ -12,19 +12,34 @@ const Favorites = () => {
 		<Paper style={{ padding: 20, margin: 10 }} elevation={5} square>
 			<Title>Favorites</Title>
 			<CardGrid>
-				{favorites?.map(({ name, currentCondition }) => (
-					<Card key={name}>
-						<p>{name}</p>
-						<div>
-							<img
-								src={`https://developer.accuweather.com/sites/default/files/${currentCondition.icon}-s.png`}
-								alt={currentCondition.description}
-							/>
-						</div>
-						<p>{currentCondition.celsius}&deg; C</p>
-						<p>{currentCondition.description}</p>
-					</Card>
-				))}
+				{favorites.length ? (
+					favorites?.map(({ name, currentCondition }) => (
+						<Card key={name}>
+							<p>{name}</p>
+							{currentCondition && (
+								<>
+									<div>
+										{currentCondition?.icon ? (
+											<img
+												src={`https://developer.accuweather.com/sites/default/files/${currentCondition?.icon}-s.png`}
+												alt={currentCondition?.description}
+											/>
+										) : null}
+									</div>
+
+									{currentCondition?.celsius && (
+										<p>{currentCondition.celsius}&deg; C</p>
+									)}
+									{currentCondition?.description && (
+										<p>{currentCondition.description}</p>
+									)}
+								</>
+							)}
+						</Card>
+					))
+				) : (
+					<h3>You have no favorites yet.</h3>
+				)}
 			</CardGrid>
 		</Paper>
 	)

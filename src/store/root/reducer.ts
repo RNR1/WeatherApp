@@ -16,20 +16,12 @@ for (let i = 0; i < 5; i++) fiveDayMock.push({ ...mockTemp })
 
 const mockCurrent = new City('Tel Aviv', '215854', mockTemp, fiveDayMock)
 
-const mockFavorites: City[] = [
-	mockCurrent,
-	new City('Jerusalem', '215854', mockTemp),
-	new City('Eilat', '215854', mockTemp),
-	new City('Madrid', '215854', mockTemp),
-	new City('Las Vegas', '215854', mockTemp)
-]
-
 interface AppState {
 	queryResults: AutocompleteDto[]
 	searching: boolean
 	error: string | null
 	currentCity: City | null
-	favoriteCities: City[] | null
+	favoriteCities: City[]
 }
 
 const initialState: AppState = {
@@ -37,7 +29,7 @@ const initialState: AppState = {
 	searching: false,
 	error: null,
 	currentCity: mockCurrent,
-	favoriteCities: mockFavorites
+	favoriteCities: getInitialFavorites()
 }
 
 const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
@@ -69,6 +61,13 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 			}
 		case Types.SEARCH_FAILED:
 			return { ...state, searching: false, error: action.payload }
+		case Types.TOGGLE_FAVORITE:
+			return {
+				...state,
+				favoriteCities: isFavorite(state.favoriteCities, state.currentCity!)
+					? removeFromFavorites(state)
+					: addToFavorites(state)
+			}
 		default:
 			return state
 	}
@@ -77,3 +76,37 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 export type RootState = ReturnType<typeof rootReducer>
 
 export default rootReducer
+
+function getInitialFavorites() {
+	const cachedFavorites = localStorage.getItem('favorites')
+	try {
+		if (!cachedFavorites) throw new Error('Cache data not found')
+		const parsedFavorites = JSON.parse(cachedFavorites) as City[]
+		return parsedFavorites.map(
+			(f) =>
+				new City(f.name, f.locationKey, f.currentCondition, f.fiveDayForecast)
+		)
+	} catch (error) {
+		return [] as City[]
+	}
+}
+
+function addToFavorites(state: AppState): City[] {
+	const updatedFavorites = [...state.favoriteCities, state.currentCity!]
+	localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+	return updatedFavorites
+}
+
+function removeFromFavorites(state: AppState): City[] {
+	const updatedFavorites = state.favoriteCities.filter(
+		(city) => city.name !== state.currentCity?.name
+	)
+	localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+	return updatedFavorites
+}
+
+export function isFavorite(favoriteCities: City[], currentCity: City): boolean {
+	return (
+		favoriteCities.findIndex((city) => city.name === currentCity?.name) !== -1
+	)
+}

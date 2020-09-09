@@ -8,3 +8,5 @@ export const SEARCH = 'App/search'
 export const SEARCH_START = 'App/searchStart'
 export const SEARCH_SUCCESS = 'App/searchSuccess'
 export const SEARCH_FAILED = 'App/searchFailed'
+
+export const TOGGLE_FAVORITE = 'App/toggleFavorite'
