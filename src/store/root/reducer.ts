@@ -1,6 +1,5 @@
 import { Reducer } from 'redux'
 import City, { Temperature } from '../../models/City'
-import AutoComplete from '../../data/Autocomplete.json'
 import { AutocompleteResponse } from '../../models/responses'
 import * as Types from '../actions/types'
 
@@ -26,7 +25,6 @@ const mockFavorites: City[] = [
 ]
 
 interface AppState {
-	searchQuery: string
 	queryResults: AutocompleteResponse[]
 	searching: boolean
 	error: string | null
@@ -35,8 +33,7 @@ interface AppState {
 }
 
 const initialState: AppState = {
-	searchQuery: '',
-	queryResults: AutoComplete,
+	queryResults: [],
 	searching: false,
 	error: null,
 	currentCity: mockCurrent,
@@ -51,7 +48,12 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 		case Types.AUTOCOMPLETE_START:
 			return { ...state, searching: true }
 		case Types.AUTOCOMPLETE_SUCCESS:
-			return { ...state, searching: false, error: null }
+			return {
+				...state,
+				searching: false,
+				error: null,
+				queryResults: action.payload
+			}
 		case Types.AUTOCOMPLETE_FAILED:
 			return { ...state, searching: false, error: action.payload }
 		case Types.SEARCH_START:

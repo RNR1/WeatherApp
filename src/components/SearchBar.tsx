@@ -3,8 +3,9 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { makeStyles } from '@material-ui/core/styles'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store/root/reducer'
+import { autoComplete } from '../store/actions/app'
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -29,14 +30,12 @@ const useStyles = makeStyles({
 })
 
 export default function SearchBar() {
-	const { searchQuery, queryResults, searching } = useSelector(
-		(state: RootState) => state
-	)
+	const dispatch = useDispatch()
+	const { queryResults, searching } = useSelector((state: RootState) => state)
 	const classes = useStyles()
 
 	return (
 		<Autocomplete
-			autoComplete={false}
 			id='country-select-demo'
 			style={{ width: 300, margin: 'auto' }}
 			options={queryResults}
@@ -45,23 +44,25 @@ export default function SearchBar() {
 			classes={{
 				option: classes.option
 			}}
-			getOptionLabel={(option) => option.LocalizedName}
+			getOptionLabel={(option) => option?.LocalizedName}
 			renderOption={(option) => (
 				<>
-					<span>{countryToFlag(option.Country.ID)}</span>
-					{option.LocalizedName}
+					<span>{countryToFlag(option?.Country.ID)}</span>
+					{option?.LocalizedName}
 				</>
 			)}
 			renderInput={(params) => (
 				<TextField
 					{...params}
+					onChange={({ target }) =>
+						target.value ? dispatch(autoComplete(target.value)) : null
+					}
 					label='Choose a country'
 					variant='outlined'
 					inputProps={{
 						...params.inputProps,
 						autoComplete: 'new-password' // disable autocomplete and autofill
 					}}
-					value={searchQuery}
 				/>
 			)}
 		/>
