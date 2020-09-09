@@ -2,6 +2,7 @@ export const AUTOCOMPLETE = 'App/autoComplete'
 export const AUTOCOMPLETE_START = 'App/autoCompleteStart'
 export const AUTOCOMPLETE_SUCCESS = 'App/autoCompleteSuccess'
 export const AUTOCOMPLETE_FAILED = 'App/autoCompleteFailed'
+export const CLEAR_RESULTS = 'App/clearResults'
 
 export const SEARCH = 'App/search'
 export const SEARCH_START = 'App/searchStart'

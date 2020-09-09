@@ -10,7 +10,7 @@ export default class City {
 	isFavorite: boolean = false
 	constructor(
 		public name: string,
-		public locationKey: number,
+		public locationKey: string,
 		public currentCondition: Temperature,
 		public fiveDayForecast?: Temperature[]
 	) {}

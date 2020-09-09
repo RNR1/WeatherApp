@@ -21,7 +21,11 @@ export const autoCompleteFailed = (payload: Error) => ({
 	payload: payload.message
 })
 
-export const search = (payload: string) => ({
+export const clearResults = () => ({
+	type: Types.CLEAR_RESULTS
+})
+
+export const search = (payload: AutocompleteResponse) => ({
 	type: Types.SEARCH,
 	payload
 })

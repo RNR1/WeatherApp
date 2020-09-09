@@ -14,14 +14,14 @@ const mockTemp: Temperature = {
 let fiveDayMock: Temperature[] = []
 for (let i = 0; i < 5; i++) fiveDayMock.push({ ...mockTemp })
 
-const mockCurrent = new City('Tel Aviv', 215854, mockTemp, fiveDayMock)
+const mockCurrent = new City('Tel Aviv', '215854', mockTemp, fiveDayMock)
 
 const mockFavorites: City[] = [
 	mockCurrent,
-	new City('Jerusalem', 215854, mockTemp),
-	new City('Eilat', 215854, mockTemp),
-	new City('Madrid', 215854, mockTemp),
-	new City('Las Vegas', 215854, mockTemp)
+	new City('Jerusalem', '215854', mockTemp),
+	new City('Eilat', '215854', mockTemp),
+	new City('Madrid', '215854', mockTemp),
+	new City('Las Vegas', '215854', mockTemp)
 ]
 
 interface AppState {
@@ -56,6 +56,8 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 			}
 		case Types.AUTOCOMPLETE_FAILED:
 			return { ...state, searching: false, error: action.payload }
+		case Types.CLEAR_RESULTS:
+			return { ...state, queryResults: [] }
 		case Types.SEARCH_START:
 			return { ...state, searching: true }
 		case Types.SEARCH_SUCCESS:
