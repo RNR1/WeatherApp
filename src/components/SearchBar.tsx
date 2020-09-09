@@ -58,11 +58,11 @@ export default function SearchBar() {
 				classes={{
 					option: classes.option
 				}}
-				getOptionLabel={(option) => option?.LocalizedName}
+				getOptionLabel={(option) => option?.name}
 				renderOption={(option) => (
 					<>
-						<span>{countryToFlag(option?.Country.ID)}</span>
-						{option?.LocalizedName}
+						<span>{countryToFlag(option?.countryISO)}</span>
+						{option?.name}
 					</>
 				)}
 				renderInput={(params) => (
@@ -79,8 +79,11 @@ export default function SearchBar() {
 					/>
 				)}
 			/>
-			<Button disabled={!resultsAvailable()} onClick={submit} type='button'>
-				Search
+			<Button
+				disabled={!resultsAvailable() || searching}
+				onClick={submit}
+				type='button'>
+				{searching ? 'Searching...' : 'Search'}
 			</Button>
 		</div>
 	)

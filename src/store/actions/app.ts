@@ -1,6 +1,6 @@
 import * as Types from './types'
-import { AutocompleteResponse } from '../../models/responses'
 import City from '../../models/City'
+import { AutocompleteDto } from '../../api/utils'
 
 export const autoComplete = (payload: string) => ({
 	type: Types.AUTOCOMPLETE,
@@ -11,7 +11,7 @@ export const autoCompleteStart = () => ({
 	type: Types.AUTOCOMPLETE_START
 })
 
-export const autoCompleteSuccess = (payload: AutocompleteResponse[]) => ({
+export const autoCompleteSuccess = (payload: AutocompleteDto[]) => ({
 	type: Types.AUTOCOMPLETE_SUCCESS,
 	payload
 })
@@ -25,7 +25,7 @@ export const clearResults = () => ({
 	type: Types.CLEAR_RESULTS
 })
 
-export const search = (payload: AutocompleteResponse) => ({
+export const search = (payload: AutocompleteDto) => ({
 	type: Types.SEARCH,
 	payload
 })

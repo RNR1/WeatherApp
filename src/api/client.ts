@@ -5,6 +5,7 @@ import {
 	FiveDayForecastResponse,
 	GeoPositionResponse
 } from '../models/responses'
+import { transformAutocomplete } from './utils'
 const apiKey = process.env.REACT_APP_API_KEY
 
 const client = axios.create({
@@ -13,9 +14,11 @@ const client = axios.create({
 
 const API = {
 	autocomplete: (q: string) =>
-		client.get<AutocompleteResponse[]>(
-			`/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${q}`
-		),
+		client
+			.get<AutocompleteResponse[]>(
+				`/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${q}`
+			)
+			.then(transformAutocomplete),
 	currentCondition: (locationKey: string = '21584') =>
 		client.get<currentConditionResponse[]>(
 			`/currentconditions/v1/${locationKey}?apikey=${apiKey}`

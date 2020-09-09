@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 import City, { Temperature } from '../../models/City'
-import { AutocompleteResponse } from '../../models/responses'
 import * as Types from '../actions/types'
+import { AutocompleteDto } from '../../api/utils'
 
 const mockTemp: Temperature = {
 	date: '2020-09-08T18:31:00+03:00',
@@ -25,7 +25,7 @@ const mockFavorites: City[] = [
 ]
 
 interface AppState {
-	queryResults: AutocompleteResponse[]
+	queryResults: AutocompleteDto[]
 	searching: boolean
 	error: string | null
 	currentCity: City | null
