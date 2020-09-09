@@ -4,15 +4,13 @@ import Paper from '@material-ui/core/Paper'
 import CardGrid, { Card } from '../styles/Cards'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/root/reducer'
+import Title from '../styles/Title'
 
 const Favorites = () => {
 	const favorites = useSelector((state: RootState) => state.favoriteCities)
 	return (
-		<Paper
-			style={{ padding: 20, margin: 10, textAlign: 'center' }}
-			elevation={5}
-			square>
-			<h2>Favorites</h2>
+		<Paper style={{ padding: 20, margin: 10 }} elevation={5} square>
+			<Title>Favorites</Title>
 			<CardGrid>
 				{favorites?.map((city) => (
 					<Card key={city.name}>
