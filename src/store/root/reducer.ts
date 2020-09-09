@@ -19,6 +19,7 @@ const mockCurrent = new City('Tel Aviv', '215854', mockTemp, fiveDayMock)
 interface AppState {
 	queryResults: AutocompleteDto[]
 	searching: boolean
+	loading: boolean
 	error: string | null
 	currentCity: City | null
 	favoriteCities: City[]
@@ -27,6 +28,7 @@ interface AppState {
 const initialState: AppState = {
 	queryResults: [],
 	searching: false,
+	loading: false,
 	error: null,
 	currentCity: mockCurrent,
 	favoriteCities: getInitialFavorites()
@@ -50,6 +52,12 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 			return { ...state, searching: false, error: action.payload }
 		case Types.CLEAR_RESULTS:
 			return { ...state, queryResults: [] }
+		case Types.GEOPOSITION_START:
+			return { ...state, loading: true }
+		case Types.GEOPOSITION_SUCCESS:
+			return { ...state, loading: false, error: null }
+		case Types.GEOPOSITION_FAILED:
+			return { ...state, loading: false, error: action.payload }
 		case Types.SEARCH_START:
 			return { ...state, searching: true }
 		case Types.SEARCH_SUCCESS:

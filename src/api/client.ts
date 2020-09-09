@@ -8,7 +8,8 @@ import {
 import {
 	transformAutocomplete,
 	transformCurrentCondition,
-	transformFiveDayForecast
+	transformFiveDayForecast,
+	transformGeoPosition
 } from './utils'
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -36,9 +37,11 @@ const API = {
 			)
 			.then(transformFiveDayForecast),
 	geoPosition: ({ lat, lon }: { lat: string; lon: string }) =>
-		client.get<GeoPositionResponse>(
-			`/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}, ${lon}`
-		)
+		client
+			.get<GeoPositionResponse>(
+				`/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}, ${lon}`
+			)
+			.then(transformGeoPosition)
 }
 
 export default API

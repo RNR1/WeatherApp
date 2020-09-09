@@ -4,6 +4,11 @@ export const AUTOCOMPLETE_SUCCESS = 'App/autoCompleteSuccess'
 export const AUTOCOMPLETE_FAILED = 'App/autoCompleteFailed'
 export const CLEAR_RESULTS = 'App/clearResults'
 
+export const GEOPOSITION = 'App/geoPosition'
+export const GEOPOSITION_START = 'App/geoPositionStart'
+export const GEOPOSITION_SUCCESS = 'App/geoPositionSuccess'
+export const GEOPOSITION_FAILED = 'App/geoPositionFailed'
+
 export const SEARCH = 'App/search'
 export const SEARCH_START = 'App/searchStart'
 export const SEARCH_SUCCESS = 'App/searchSuccess'

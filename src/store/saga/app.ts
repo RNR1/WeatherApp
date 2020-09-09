@@ -5,11 +5,15 @@ import {
 	autoCompleteFailed,
 	searchStart,
 	searchSuccess,
-	searchFailed
+	searchFailed,
+	geoPositionFailed,
+	geoPositionStart,
+	geoPositionSuccess,
+	search
 } from '../actions/app'
 import API from '../../api/client'
 import City, { Temperature } from '../../models/City'
-import { AutocompleteDto } from '../../api/utils'
+import { AutocompleteDto, GeoPositionDto } from '../../api/utils'
 
 export function* autoCompleteSaga({
 	payload
@@ -23,6 +27,22 @@ export function* autoCompleteSaga({
 		yield put(autoCompleteSuccess(results))
 	} catch (error) {
 		yield put(autoCompleteFailed(error))
+	}
+}
+
+export function* geoPositionSaga({
+	payload
+}: {
+	type: string
+	payload: { lat: string; lon: string }
+}) {
+	try {
+		yield put(geoPositionStart())
+		const results: GeoPositionDto = yield API.geoPosition(payload)
+		yield put(geoPositionSuccess())
+		yield put(search(results))
+	} catch (error) {
+		yield put(geoPositionFailed(error))
 	}
 }
 

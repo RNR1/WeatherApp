@@ -1,10 +1,20 @@
 import {
 	AutocompleteResponse,
 	currentConditionResponse,
-	FiveDayForecastResponse
+	FiveDayForecastResponse,
+	GeoPositionResponse
 } from '../models/responses'
 import { AxiosResponse } from 'axios'
 import { Temperature } from '../models/City'
+
+export interface GeoPositionDto {
+	name: string
+	locationKey: string
+}
+
+export interface AutocompleteDto extends GeoPositionDto {
+	countryISO: string
+}
 
 export const transformAutocomplete = ({
 	data
@@ -14,12 +24,6 @@ export const transformAutocomplete = ({
 		locationKey: city.Key,
 		countryISO: city.Country.ID
 	}))
-
-export type AutocompleteDto = {
-	name: string
-	locationKey: string
-	countryISO: string
-}
 
 export const transformCurrentCondition = ({
 	data
@@ -41,6 +45,13 @@ export const transformFiveDayForecast = ({
 		celsius: day.Temperature.Maximum.Value,
 		fahrenheit: transformToFahrenheit(day.Temperature.Maximum.Value)
 	}))
+
+export const transformGeoPosition = ({
+	data: { LocalizedName, Key }
+}: AxiosResponse<GeoPositionResponse>): GeoPositionDto => ({
+	name: LocalizedName,
+	locationKey: Key
+})
 
 export function transformWeatherIcon(icon: number) {
 	return icon < 10 ? `0${icon}` : icon.toString()
