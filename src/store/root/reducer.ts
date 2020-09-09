@@ -5,7 +5,7 @@ import { AutocompleteDto } from '../../api/utils'
 
 const mockTemp: Temperature = {
 	date: '2020-09-08T18:31:00+03:00',
-	icon: 1,
+	icon: `01`,
 	description: 'Sunny',
 	celsius: 30.5,
 	fahrenheit: 87

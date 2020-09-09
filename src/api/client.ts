@@ -5,7 +5,11 @@ import {
 	FiveDayForecastResponse,
 	GeoPositionResponse
 } from '../models/responses'
-import { transformAutocomplete } from './utils'
+import {
+	transformAutocomplete,
+	transformCurrentCondition,
+	transformFiveDayForecast
+} from './utils'
 const apiKey = process.env.REACT_APP_API_KEY
 
 const client = axios.create({
@@ -20,13 +24,17 @@ const API = {
 			)
 			.then(transformAutocomplete),
 	currentCondition: (locationKey: string = '21584') =>
-		client.get<currentConditionResponse[]>(
-			`/currentconditions/v1/${locationKey}?apikey=${apiKey}`
-		),
+		client
+			.get<currentConditionResponse[]>(
+				`/currentconditions/v1/${locationKey}?apikey=${apiKey}`
+			)
+			.then(transformCurrentCondition),
 	fiveDayForecast: (locationKey: string = '21584') =>
-		client.get<FiveDayForecastResponse>(
-			`/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&metric=true`
-		),
+		client
+			.get<FiveDayForecastResponse>(
+				`/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&metric=true`
+			)
+			.then(transformFiveDayForecast),
 	geoPosition: ({ lat, lon }: { lat: string; lon: string }) =>
 		client.get<GeoPositionResponse>(
 			`/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}, ${lon}`

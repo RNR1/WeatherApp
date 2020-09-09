@@ -5,7 +5,6 @@ import CardGrid, { Card } from '../styles/Cards'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/root/reducer'
 import Title from '../styles/Title'
-import { transformIcon } from '../utils/dataTransform'
 
 const FiveDayForecast = () => {
 	const days = useSelector(
@@ -20,9 +19,7 @@ const FiveDayForecast = () => {
 						<p>{dayjs(date).format('ddd')}</p>
 						<div>
 							<img
-								src={`https://developer.accuweather.com/sites/default/files/${transformIcon(
-									icon
-								)}-s.png`}
+								src={`https://developer.accuweather.com/sites/default/files/${icon}-s.png`}
 								alt={description}
 							/>
 						</div>

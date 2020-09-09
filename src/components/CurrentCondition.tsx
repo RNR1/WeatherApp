@@ -5,7 +5,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/root/reducer'
-import { transformIcon } from '../utils/dataTransform'
 
 const CurrentCondition = () => {
 	const city = useSelector((state: RootState) => state.currentCity)
@@ -22,9 +21,7 @@ const CurrentCondition = () => {
 				<div className='information'>
 					<div className='image'>
 						<img
-							src={`https://developer.accuweather.com/sites/default/files/${transformIcon(
-								icon
-							)}-s.png`}
+							src={`https://developer.accuweather.com/sites/default/files/${icon}-s.png`}
 							alt={description}
 						/>
 					</div>

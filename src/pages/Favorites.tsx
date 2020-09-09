@@ -12,17 +12,17 @@ const Favorites = () => {
 		<Paper style={{ padding: 20, margin: 10 }} elevation={5} square>
 			<Title>Favorites</Title>
 			<CardGrid>
-				{favorites?.map((city) => (
-					<Card key={city.name}>
-						<p>{city.name}</p>
+				{favorites?.map(({ name, currentCondition }) => (
+					<Card key={name}>
+						<p>{name}</p>
 						<div>
 							<img
-								src={`https://developer.accuweather.com/sites/default/files/0${city.currentCondition.icon}-s.png`}
-								alt={city.currentCondition.description}
+								src={`https://developer.accuweather.com/sites/default/files/${currentCondition.icon}-s.png`}
+								alt={currentCondition.description}
 							/>
 						</div>
-						<p>{city.currentCondition.celsius}&deg; C</p>
-						<p>{city.currentCondition.description}</p>
+						<p>{currentCondition.celsius}&deg; C</p>
+						<p>{currentCondition.description}</p>
 					</Card>
 				))}
 			</CardGrid>

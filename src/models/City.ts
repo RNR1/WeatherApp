@@ -1,6 +1,6 @@
 export interface Temperature {
 	date: string
-	icon: number
+	icon: string
 	description: string
 	celsius: number
 	fahrenheit: number
