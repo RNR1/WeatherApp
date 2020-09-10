@@ -7,6 +7,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import { RootState, isFavorite } from '../store/root/reducer'
 import { toggleFavorite } from '../store/actions/app'
 import TempUnit from './TemperatureUnit'
+import { CircularProgress } from '@material-ui/core'
 
 const CurrentCondition = () => {
 	const { currentCity } = useSelector((state: RootState) => state)
@@ -14,7 +15,12 @@ const CurrentCondition = () => {
 	const dispatch = useDispatch()
 	const handleFavorite = () => dispatch(toggleFavorite())
 
-	if (!currentCity) return <Container>Loading...</Container>
+	if (!currentCity)
+		return (
+			<Container>
+				<CircularProgress />
+			</Container>
+		)
 	const {
 		name,
 		currentCondition: { icon, description, celsius, fahrenheit }
