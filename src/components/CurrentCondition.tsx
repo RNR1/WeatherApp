@@ -12,6 +12,8 @@ const CurrentCondition = () => {
 	const favorites = useSelector((state: RootState) => state.favoriteCities)
 	const dispatch = useDispatch()
 	const handleFavorite = () => dispatch(toggleFavorite())
+
+	if (!city) return <Container>Loading...</Container>
 	const {
 		name,
 		currentCondition: { icon, description, celsius }

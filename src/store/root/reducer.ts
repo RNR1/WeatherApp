@@ -1,20 +1,7 @@
 import { Reducer } from 'redux'
-import City, { Temperature } from '../../models/City'
+import City from '../../models/City'
 import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/utils'
-
-const mockTemp: Temperature = {
-	date: '2020-09-08T18:31:00+03:00',
-	icon: `01`,
-	description: 'Sunny',
-	celsius: 30.5,
-	fahrenheit: 87
-}
-
-let fiveDayMock: Temperature[] = []
-for (let i = 0; i < 5; i++) fiveDayMock.push({ ...mockTemp })
-
-const mockCurrent = new City('Tel Aviv', '215854', mockTemp, fiveDayMock)
 
 interface AppState {
 	queryResults: AutocompleteDto[]
@@ -30,7 +17,7 @@ const initialState: AppState = {
 	searching: false,
 	loading: false,
 	error: null,
-	currentCity: mockCurrent,
+	currentCity: null,
 	favoriteCities: getInitialFavorites()
 }
 

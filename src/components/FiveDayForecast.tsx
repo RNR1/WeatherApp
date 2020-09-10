@@ -7,14 +7,14 @@ import { RootState } from '../store/root/reducer'
 import Title from '../styles/Title'
 
 const FiveDayForecast = () => {
-	const days = useSelector(
-		(state: RootState) => state.currentCity!.fiveDayForecast
-	)
+	const city = useSelector((state: RootState) => state.currentCity)
+	if (!city) return <CardGrid>Loading...</CardGrid>
+	const { fiveDayForecast } = city
 	return (
 		<>
 			<Title>Five-day Forecast</Title>
 			<CardGrid>
-				{days?.map(({ date, icon, description, celsius }, i) => (
+				{fiveDayForecast?.map(({ date, icon, description, celsius }, i) => (
 					<Card key={i.toString()}>
 						<p>{dayjs(date).format('ddd')}</p>
 						<div>

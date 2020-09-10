@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Routes from './routes/Routes'
 import Layout from './components/Layout'
 import { useDispatch } from 'react-redux'
-import { geoPosition } from './store/actions/app'
+import { geoPosition, search } from './store/actions/app'
 
 function App() {
 	const dispatch = useDispatch()
@@ -12,7 +12,7 @@ function App() {
 				const coords = { lat: latitude.toString(), lon: longitude.toString() }
 				dispatch(geoPosition(coords))
 			},
-			(error) => console.error(error),
+			(error) => dispatch(search({ name: 'Tel Aviv', locationKey: '215854' })),
 			{ enableHighAccuracy: true }
 		)
 	}, [dispatch])
