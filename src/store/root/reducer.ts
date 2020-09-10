@@ -3,12 +3,11 @@ import City from '../../models/City'
 import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/utils'
 import {
-	getInitialFavorites,
 	isFavorite,
 	removeFromFavorites,
 	addToFavorites
 } from '../helpers/favorites'
-import { getInitialMode } from '../helpers/darkMode'
+import * as cache from '../helpers/cache'
 
 export interface AppState {
 	darkMode: boolean
@@ -22,14 +21,14 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-	darkMode: getInitialMode(),
-	tempUnit: false,
+	darkMode: cache.getInitialTheme(),
+	tempUnit: cache.getInitialUnit(),
 	queryResults: [],
 	searching: false,
 	loading: false,
 	error: null,
 	currentCity: null,
-	favoriteCities: getInitialFavorites()
+	favoriteCities: cache.getInitialFavorites()
 }
 
 const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
@@ -75,9 +74,10 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 					: addToFavorites(state)
 			}
 		case Types.TOGGLE_DARK_MODE:
-			localStorage.setItem('dark', JSON.stringify(!state.darkMode))
+			cache.set('dark', !state.darkMode)
 			return { ...state, darkMode: !state.darkMode }
 		case Types.TOGGLE_TEMP_UNIT:
+			cache.set('tempUnit', !state.tempUnit)
 			return { ...state, tempUnit: !state.tempUnit }
 		default:
 			return state
