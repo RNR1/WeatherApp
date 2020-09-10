@@ -13,7 +13,7 @@ const Navbar = () => {
 	const dispatch = useDispatch()
 	return (
 		<nav>
-			<List>
+			<List darkMode={darkMode}>
 				<section>
 					<NavItem>
 						<NavLink exact to='/'>
@@ -47,8 +47,8 @@ const Navbar = () => {
 
 export default Navbar
 
-const List = styled.ul`
-	font-size: 1.2em;
+const List = styled.ul<{ darkMode: boolean }>`
+	font-size: 1.3em;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -59,12 +59,46 @@ const List = styled.ul`
 	height: 100%;
 	width: 100%;
 
+	& section {
+		width: 100%;
+	}
+
+	& a {
+		color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
+		text-decoration: none;
+		width: 100%;
+		box-sizing: border-box;
+		display: block;
+		transition: border-bottom 0.3s;
+	}
+
+	& a:hover,
+	& a:active,
+	& a.active {
+		color: ${({ darkMode }) => (darkMode ? '#f7d1ba' : '#145374')};
+	}
+
 	@media (min-width: 500px) {
 		font-size: 1em;
 		flex-flow: row;
 
 		& section {
 			display: flex;
+			width: auto;
+		}
+
+		& a {
+			color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
+			height: 100%;
+			padding: 16px 10px;
+			border-bottom: 4px solid transparent;
+		}
+
+		& a:hover,
+		& a:active,
+		& a.active {
+			border-bottom: 4px solid #e0ece4;
+			color: #e0ece4;
 		}
 	}
 `

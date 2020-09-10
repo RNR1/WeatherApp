@@ -26,7 +26,11 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<SideDrawer open={open} close={() => setOpen(false)} />
+			<SideDrawer
+				darkMode={darkMode}
+				open={open}
+				close={() => setOpen(false)}
+			/>
 			<Header darkMode={darkMode}>
 				<DrawerToggle
 					darkMode={darkMode}

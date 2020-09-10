@@ -8,25 +8,6 @@ const NavItem = styled.li`
 	width: 100%;
 	align-items: center;
 
-	& div {
-		color: black;
-	}
-
-	& a {
-		color: black;
-		text-decoration: none;
-		width: 100%;
-		box-sizing: border-box;
-		display: block;
-		transition: border-bottom 0.3s;
-	}
-
-	& a:hover,
-	& a:active,
-	& a.active {
-		color: #056674;
-	}
-
 	@media (min-width: 500px) {
 		margin: 0;
 		display: flex;
@@ -35,20 +16,6 @@ const NavItem = styled.li`
 		align-items: center;
 
 		& div {
-			color: #e0ece4;
-		}
-
-		& a {
-			color: white;
-			height: 100%;
-			padding: 16px 10px;
-			border-bottom: 4px solid transparent;
-		}
-
-		& a:hover,
-		& a:active,
-		& a.active {
-			border-bottom: 4px solid #e0ece4;
 			color: #e0ece4;
 		}
 	}

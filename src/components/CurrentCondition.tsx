@@ -11,12 +11,12 @@ import TempUnit from './TemperatureUnit'
 import { CircularProgress } from '@material-ui/core'
 
 const CurrentCondition = () => {
-	const { currentCity } = useSelector((state: RootState) => state)
+	const { currentCity, loading } = useSelector((state: RootState) => state)
 	const favorites = useSelector((state: RootState) => state.favoriteCities)
 	const dispatch = useDispatch()
 	const handleFavorite = () => dispatch(toggleFavorite())
 
-	if (!currentCity)
+	if (loading || !currentCity)
 		return (
 			<Container>
 				<CircularProgress />

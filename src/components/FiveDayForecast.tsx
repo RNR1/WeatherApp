@@ -5,11 +5,17 @@ import CardGrid, { Card } from '../styles/Cards'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/root/reducer'
 import Title from '../styles/Title'
+import { CircularProgress } from '@material-ui/core'
 
 const FiveDayForecast = () => {
-	const city = useSelector((state: RootState) => state.currentCity)
-	if (!city) return <CardGrid>Loading...</CardGrid>
-	const { fiveDayForecast } = city
+	const { currentCity, loading } = useSelector((state: RootState) => state)
+	if (loading || !currentCity)
+		return (
+			<CardGrid>
+				<CircularProgress />
+			</CardGrid>
+		)
+	const { fiveDayForecast } = currentCity
 	return (
 		<>
 			<Title>Five-day Forecast</Title>

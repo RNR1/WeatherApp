@@ -7,13 +7,14 @@ import Navbar from './Navbar'
 interface Props {
 	open: boolean
 	close: () => void
+	darkMode: boolean
 }
 
-const SideDrawer: FC<Props> = ({ open, close }) => {
+const SideDrawer: FC<Props> = ({ open, close, darkMode }) => {
 	return (
 		<>
 			<Backdrop show={open} onClick={close} />
-			<Drawer open={open}>
+			<Drawer open={open} darkMode={darkMode}>
 				<Logo />
 				<Navbar />
 			</Drawer>
@@ -23,7 +24,7 @@ const SideDrawer: FC<Props> = ({ open, close }) => {
 
 export default SideDrawer
 
-const Drawer = styled.div<{ open: boolean }>`
+const Drawer = styled.div<{ open: boolean; darkMode: boolean }>`
 	position: fixed;
 	width: 280px;
 	max-width: 70%;
@@ -31,7 +32,7 @@ const Drawer = styled.div<{ open: boolean }>`
 	left: 0;
 	top: 0;
 	z-index: 200;
-	background-color: white;
+	background-color: ${({ darkMode }) => (darkMode ? '#1a1919' : 'white')};
 	padding: 32px 16px;
 	box-sizing: border-box;
 	transition: transform 0.3s ease-out;
@@ -41,15 +42,8 @@ const Drawer = styled.div<{ open: boolean }>`
 		display: none;
 	}
 
-	&.Open {
-		transform: translateX(0);
-	}
-
-	&.Close {
-		transform: translateX(-100%);
-	}
-
 	& .Logo {
+		background: none;
 		height: 11%;
 		margin-bottom: 32px;
 		text-align: center;
