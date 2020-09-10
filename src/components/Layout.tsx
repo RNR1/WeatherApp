@@ -36,7 +36,7 @@ const Header = styled.header`
 	left: 0;
 	background-color: #5398be;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	padding: 0 20px;
 	box-sizing: border-box;
@@ -44,6 +44,7 @@ const Header = styled.header`
 
 	& nav {
 		height: 100%;
+		width: 100%;
 	}
 
 	& .Logo {
@@ -51,6 +52,8 @@ const Header = styled.header`
 	}
 
 	@media (max-width: 499px) {
+		justify-content: space-between;
+
 		& nav {
 			display: none;
 		}

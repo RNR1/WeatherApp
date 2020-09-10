@@ -51,5 +51,6 @@ const Drawer = styled.div`
 	& .Logo {
 		height: 11%;
 		margin-bottom: 32px;
+		text-align: center;
 	}
 `
