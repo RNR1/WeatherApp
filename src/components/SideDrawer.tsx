@@ -13,7 +13,7 @@ const SideDrawer: FC<Props> = ({ open, close }) => {
 	return (
 		<>
 			<Backdrop show={open} onClick={close} />
-			<Drawer className={open ? 'Open' : 'Close'}>
+			<Drawer open={open}>
 				<Logo />
 				<Navbar />
 			</Drawer>
@@ -23,7 +23,7 @@ const SideDrawer: FC<Props> = ({ open, close }) => {
 
 export default SideDrawer
 
-const Drawer = styled.div`
+const Drawer = styled.div<{ open: boolean }>`
 	position: fixed;
 	width: 280px;
 	max-width: 70%;
@@ -35,6 +35,7 @@ const Drawer = styled.div`
 	padding: 32px 16px;
 	box-sizing: border-box;
 	transition: transform 0.3s ease-out;
+	transform: translateX(${({ open }) => (open ? 0 : '-100%')});
 
 	@media (min-width: 500px) {
 		display: none;

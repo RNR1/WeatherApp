@@ -2,8 +2,15 @@ import { Reducer } from 'redux'
 import City from '../../models/City'
 import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/utils'
+import {
+	getInitialFavorites,
+	isFavorite,
+	removeFromFavorites,
+	addToFavorites
+} from '../helpers/favorites'
+import { getInitialMode } from '../helpers/darkMode'
 
-interface AppState {
+export interface AppState {
 	darkMode: boolean
 	tempUnit: boolean
 	queryResults: AutocompleteDto[]
@@ -15,7 +22,7 @@ interface AppState {
 }
 
 const initialState: AppState = {
-	darkMode: false,
+	darkMode: getInitialMode(),
 	tempUnit: false,
 	queryResults: [],
 	searching: false,
@@ -68,6 +75,7 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 					: addToFavorites(state)
 			}
 		case Types.TOGGLE_DARK_MODE:
+			localStorage.setItem('dark', JSON.stringify(!state.darkMode))
 			return { ...state, darkMode: !state.darkMode }
 		case Types.TOGGLE_TEMP_UNIT:
 			return { ...state, tempUnit: !state.tempUnit }
@@ -79,37 +87,3 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 export type RootState = ReturnType<typeof rootReducer>
 
 export default rootReducer
-
-function getInitialFavorites() {
-	const cachedFavorites = localStorage.getItem('favorites')
-	try {
-		if (!cachedFavorites) throw new Error('Cache data not found')
-		const parsedFavorites = JSON.parse(cachedFavorites) as City[]
-		return parsedFavorites.map(
-			(f) =>
-				new City(f.name, f.locationKey, f.currentCondition, f.fiveDayForecast)
-		)
-	} catch (error) {
-		return [] as City[]
-	}
-}
-
-function addToFavorites(state: AppState): City[] {
-	const updatedFavorites = [...state.favoriteCities, state.currentCity!]
-	localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-	return updatedFavorites
-}
-
-function removeFromFavorites(state: AppState): City[] {
-	const updatedFavorites = state.favoriteCities.filter(
-		(city) => city.name !== state.currentCity?.name
-	)
-	localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-	return updatedFavorites
-}
-
-export function isFavorite(favoriteCities: City[], currentCity: City): boolean {
-	return (
-		favoriteCities.findIndex((city) => city.name === currentCity?.name) !== -1
-	)
-}

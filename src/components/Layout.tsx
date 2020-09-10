@@ -1,23 +1,42 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import styled from 'styled-components'
 
 import Navbar from './Navbar'
 import Logo from './Logo'
 import SideDrawer from './SideDrawer'
 import DrawerToggle from './DrawerToggle'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/root/reducer'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	const [open, setOpen] = useState(false)
+	const { darkMode } = useSelector((state: RootState) => state)
+
+	const theme = React.useMemo(
+		() =>
+			createMuiTheme({
+				palette: {
+					type: darkMode ? 'dark' : 'light'
+				}
+			}),
+		[darkMode]
+	)
 	return (
-		<>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<SideDrawer open={open} close={() => setOpen(false)} />
-			<Header>
-				<DrawerToggle onClick={() => setOpen((prev) => !prev)} />
+			<Header darkMode={darkMode}>
+				<DrawerToggle
+					darkMode={darkMode}
+					onClick={() => setOpen((prev) => !prev)}
+				/>
 				<Logo />
 				<Navbar />
 			</Header>
 			<Main>{children}</Main>
-		</>
+		</ThemeProvider>
 	)
 }
 
@@ -28,13 +47,13 @@ const Main = styled.main`
 	max-width: 960px;
 `
 
-const Header = styled.header`
+const Header = styled.header<{ darkMode: boolean }>`
 	height: 56px;
 	width: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: #5398be;
+	background-color: ${({ darkMode }) => (darkMode ? '#1a1919' : '#5398be')};
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

@@ -1,9 +1,14 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-const DrawerToggle: FC<{ onClick: () => void }> = ({ onClick }) => {
+interface Props {
+	darkMode?: boolean
+	onClick: () => void
+}
+
+const DrawerToggle: FC<Props> = ({ ...props }) => {
 	return (
-		<Container onClick={onClick}>
+		<Container {...props}>
 			<div />
 			<div />
 			<div />
@@ -13,7 +18,7 @@ const DrawerToggle: FC<{ onClick: () => void }> = ({ onClick }) => {
 
 export default DrawerToggle
 
-const Container = styled.div`
+const Container = styled.div<Props>`
 	width: 40px;
 	height: 100%;
 	display: flex;
@@ -27,7 +32,7 @@ const Container = styled.div`
 	& div {
 		width: 90%;
 		height: 3px;
-		background-color: white;
+		background-color: ${({ darkMode }) => (darkMode ? '#f1f3de' : 'white')};
 	}
 
 	@media (min-width: 500px) {
