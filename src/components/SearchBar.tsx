@@ -41,12 +41,18 @@ export default function SearchBar() {
 
 	const resultsAvailable = () => queryResults?.length > 0
 
-	const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) =>
-		target.value
-			? dispatch(autoComplete(target.value))
-			: dispatch(clearResults())
 	const submit = () =>
 		resultsAvailable() ? dispatch(search(queryResults[0])) : null
+
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === 'Enter') return submit()
+		if (!isAlphabetic(e.key)) return e.preventDefault()
+	}
+
+	const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+		if (!target.value) return dispatch(clearResults())
+		dispatch(autoComplete(target.value))
+	}
 
 	return (
 		<div className={classes.container}>
@@ -70,7 +76,7 @@ export default function SearchBar() {
 						{...params}
 						label='Choose a country'
 						onChange={handleChange}
-						onKeyPress={({ key }) => key === 'Enter' && submit()}
+						onKeyPress={handleKeyPress}
 						variant='outlined'
 						inputProps={{
 							...params.inputProps,
@@ -87,4 +93,8 @@ export default function SearchBar() {
 			</Button>
 		</div>
 	)
+}
+
+function isAlphabetic(key: string) {
+	return /^[a-zA-Z ]*$/.test(key)
 }
