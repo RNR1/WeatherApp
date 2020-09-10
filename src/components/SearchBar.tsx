@@ -37,7 +37,9 @@ const useStyles = makeStyles({
 export default function SearchBar() {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const { queryResults, searching } = useSelector((state: RootState) => state)
+	const { queryResults, searching, error } = useSelector(
+		(state: RootState) => state
+	)
 
 	const resultsAvailable = () => queryResults?.length > 0
 
@@ -53,6 +55,8 @@ export default function SearchBar() {
 		if (!target.value) return dispatch(clearResults())
 		dispatch(autoComplete(target.value))
 	}
+
+	if (error) return null
 
 	return (
 		<div className={classes.container}>
