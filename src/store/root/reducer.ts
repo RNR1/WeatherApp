@@ -4,7 +4,6 @@ import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/utils'
 
 interface AppState {
-	searchQuery: string
 	queryResults: AutocompleteDto[]
 	searching: boolean
 	loading: boolean
@@ -14,7 +13,6 @@ interface AppState {
 }
 
 const initialState: AppState = {
-	searchQuery: '',
 	queryResults: [],
 	searching: false,
 	loading: false,

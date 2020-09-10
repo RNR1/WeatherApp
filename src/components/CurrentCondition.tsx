@@ -38,9 +38,12 @@ const CurrentCondition = () => {
 					<div>
 						<span>
 							{isFavorite(favorites, city) ? (
-								<FavoriteIcon onClick={handleFavorite} />
+								<FavoriteIcon color='error' onClick={handleFavorite} />
 							) : (
-								<FavoriteBorderOutlinedIcon onClick={handleFavorite} />
+								<FavoriteBorderOutlinedIcon
+									color='error'
+									onClick={handleFavorite}
+								/>
 							)}
 						</span>
 					</div>
