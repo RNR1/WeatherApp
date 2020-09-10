@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { search } from '../store/actions/app'
+import TempUnit from './TemperatureUnit'
 
 const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 	const history = useHistory()
@@ -14,6 +15,7 @@ const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 		dispatch(search({ name, locationKey }))
 		history.push('/')
 	}
+
 	return (
 		<ClickableCard onClick={onClick}>
 			<p>{name}</p>
@@ -28,9 +30,10 @@ const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 						) : null}
 					</div>
 
-					{currentCondition?.celsius && (
-						<p>{currentCondition.celsius}&deg; C</p>
-					)}
+					<TempUnit
+						celsius={currentCondition.celsius}
+						fahrenheit={currentCondition.fahrenheit}
+					/>
 					{currentCondition?.description && (
 						<p>{currentCondition.description}</p>
 					)}
