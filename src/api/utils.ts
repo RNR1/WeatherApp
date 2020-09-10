@@ -58,5 +58,5 @@ export function transformWeatherIcon(icon: number) {
 }
 
 export function transformToFahrenheit(celsius: number) {
-	return (celsius / 5) * 9 + 32
+	return celsius * (9 / 5) + 32
 }

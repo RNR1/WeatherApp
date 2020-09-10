@@ -65,3 +65,11 @@ export const searchFailed = (payload: Error) => ({
 export const toggleFavorite = () => ({
 	type: Types.TOGGLE_FAVORITE
 })
+
+export const toggleDarkMode = () => ({
+	type: Types.TOGGLE_DARK_MODE
+})
+
+export const toggleTempUnit = () => ({
+	type: Types.TOGGLE_TEMP_UNIT
+})

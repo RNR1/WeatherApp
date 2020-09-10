@@ -1,25 +1,16 @@
-import React, { PropsWithChildren, FC } from 'react'
 import styled from 'styled-components'
-import { NavLink, NavLinkProps } from 'react-router-dom'
 
-const NavItem: FC<PropsWithChildren<NavLinkProps>> = ({ to, children }) => {
-	return (
-		<Item>
-			<NavLink to={to} exact>
-				{children}
-			</NavLink>
-		</Item>
-	)
-}
-
-export default NavItem
-
-const Item = styled.li`
+const NavItem = styled.li`
 	margin: 10px 0;
+	padding: 0 5px;
 	box-sizing: border-box;
 	display: block;
 	width: 100%;
 	align-items: center;
+
+	& div {
+		color: black;
+	}
 
 	& a {
 		color: black;
@@ -43,6 +34,10 @@ const Item = styled.li`
 		width: auto;
 		align-items: center;
 
+		& div {
+			color: #e0ece4;
+		}
+
 		& a {
 			color: white;
 			height: 100%;
@@ -58,3 +53,5 @@ const Item = styled.li`
 		}
 	}
 `
+
+export default NavItem

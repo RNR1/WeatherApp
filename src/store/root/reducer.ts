@@ -4,6 +4,8 @@ import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/utils'
 
 interface AppState {
+	darkMode: boolean
+	tempUnit: boolean
 	queryResults: AutocompleteDto[]
 	searching: boolean
 	loading: boolean
@@ -13,6 +15,8 @@ interface AppState {
 }
 
 const initialState: AppState = {
+	darkMode: false,
+	tempUnit: false,
 	queryResults: [],
 	searching: false,
 	loading: false,
@@ -63,6 +67,10 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 					? removeFromFavorites(state)
 					: addToFavorites(state)
 			}
+		case Types.TOGGLE_DARK_MODE:
+			return { ...state, darkMode: !state.darkMode }
+		case Types.TOGGLE_TEMP_UNIT:
+			return { ...state, tempUnit: !state.tempUnit }
 		default:
 			return state
 	}
