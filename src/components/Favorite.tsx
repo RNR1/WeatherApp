@@ -1,10 +1,21 @@
 import React, { FC } from 'react'
 import { Card } from '../styles/Cards'
 import City from '../models/City'
+import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { search } from '../store/actions/app'
 
-const Favorite: FC<City> = ({ currentCondition, name }) => {
+const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
+	const history = useHistory()
+	const dispatch = useDispatch()
+
+	const onClick = (_: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		dispatch(search({ name, locationKey }))
+		history.push('/')
+	}
 	return (
-		<Card key={name}>
+		<ClickableCard onClick={onClick}>
 			<p>{name}</p>
 			{currentCondition && (
 				<>
@@ -25,8 +36,12 @@ const Favorite: FC<City> = ({ currentCondition, name }) => {
 					)}
 				</>
 			)}
-		</Card>
+		</ClickableCard>
 	)
 }
 
 export default Favorite
+
+const ClickableCard = styled(Card)`
+	cursor: pointer;
+`

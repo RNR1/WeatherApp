@@ -14,7 +14,9 @@ const Favorites = () => {
 			<Title>Favorites</Title>
 			<CardGrid>
 				{favorites.length ? (
-					favorites?.map((city) => <Favorite {...city} />)
+					favorites?.map((city) => (
+						<Favorite key={city.locationKey} {...city} />
+					))
 				) : (
 					<h3>You have no favorites yet.</h3>
 				)}
