@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import dayjs from 'dayjs'
 
-import { Temperature } from '../../models/City'
+import Temperature from '../../models/Temperature'
 import { TempIcon, TempUnit, Card } from '../shared'
 
 const Day: FC<Temperature> = ({

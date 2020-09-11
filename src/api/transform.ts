@@ -5,7 +5,7 @@ import {
 	GeoPositionResponse
 } from '../models/responses'
 import { AxiosResponse } from 'axios'
-import { Temperature } from '../models/City'
+import Temperature from '../models/Temperature'
 
 export interface GeoPositionDto {
 	name: string

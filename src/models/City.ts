@@ -1,10 +1,4 @@
-export interface Temperature {
-	date: string
-	icon: string
-	description: string
-	celsius: number
-	fahrenheit: number
-}
+import Temperature from './Temperature'
 
 export default class City {
 	isFavorite: boolean = false

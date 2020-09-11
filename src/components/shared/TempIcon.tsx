@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-import { Temperature } from '../../models/City'
+import Temperature from '../../models/Temperature'
 
 const TempIcon: FC<Partial<Temperature>> = ({ icon, description }) => {
 	return (

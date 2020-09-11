@@ -12,7 +12,8 @@ import {
 	search
 } from '../actions/app'
 import API from '../../api/client'
-import City, { Temperature } from '../../models/City'
+import City from '../../models/City'
+import Temperature from '../../models/Temperature'
 import { AutocompleteDto, GeoPositionDto } from '../../api/transform'
 import { autocomplete } from '../../api/utils'
 
