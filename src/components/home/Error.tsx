@@ -17,7 +17,7 @@ const Error: FC<{ message: string }> = ({ message }) => {
 		<Container elevation={5} square>
 			<Lottie options={defaultOptions} height={150} width={150} />
 			<h2>Error - {message}</h2>
-			<h5>Please try again later</h5>
+			<p>Please try again later</p>
 		</Container>
 	)
 }
