@@ -8,10 +8,13 @@ interface Props {
 	onChange: () => void
 }
 
-const Toggle: FC<Props> = ({ checked, onChange, icons: [L, R] }) => (
+const Toggle: FC<Props> = ({ checked, onChange, icons: [L, R], ...props }) => (
 	<Container onClick={onChange}>
 		<span>{L}</span>
-		<Switch checked={checked} />
+		<Switch
+			checked={checked}
+			inputProps={{ ...props, 'aria-checked': checked }}
+		/>
 		<span>{R}</span>
 	</Container>
 )
