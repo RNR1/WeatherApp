@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store/root/reducer'
 import { autoComplete, search, clearResults } from '../store/actions/app'
 import { Button } from '@material-ui/core'
+import styled from 'styled-components'
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -30,14 +31,14 @@ const useStyles = makeStyles({
 	},
 	container: {
 		display: 'flex',
-		justifyItems: 'center'
+		justifyContent: 'center'
 	}
 })
 
 export default function SearchBar() {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const { queryResults, searching, error } = useSelector(
+	const { queryResults, searching, loading, error } = useSelector(
 		(state: RootState) => state
 	)
 
@@ -61,7 +62,7 @@ export default function SearchBar() {
 	return (
 		<div className={classes.container}>
 			<Autocomplete
-				style={{ width: 300, margin: 'auto' }}
+				style={{ width: 300 }}
 				options={queryResults}
 				autoHighlight
 				loading={searching}
@@ -78,7 +79,7 @@ export default function SearchBar() {
 				renderInput={(params) => (
 					<TextField
 						{...params}
-						label='Choose a country'
+						label='Search location'
 						onChange={handleChange}
 						onKeyPress={handleKeyPress}
 						variant='outlined'
@@ -89,12 +90,12 @@ export default function SearchBar() {
 					/>
 				)}
 			/>
-			<Button
+			<CustomButton
 				disabled={!resultsAvailable() || searching}
 				onClick={submit}
 				type='button'>
-				{searching ? 'Searching...' : 'Search'}
-			</Button>
+				{loading ? 'Searching...' : 'Search'}
+			</CustomButton>
 		</div>
 	)
 }
@@ -102,3 +103,9 @@ export default function SearchBar() {
 function isAlphabetic(key: string) {
 	return /^[a-zA-Z ]*$/.test(key)
 }
+
+const CustomButton = styled(Button)`
+	@media (max-width: 500px) {
+		display: none;
+	}
+`
