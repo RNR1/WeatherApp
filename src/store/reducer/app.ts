@@ -22,7 +22,7 @@ export interface AppState {
 
 const initialState: AppState = {
 	darkMode: cache.getInitialTheme(),
-	tempUnit: cache.getInitialUnit(),
+	tempUnit: cache.getInitialTempUnit(),
 	queryResults: [],
 	searching: false,
 	loading: false,

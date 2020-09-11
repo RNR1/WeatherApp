@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import Day from './Day'
 import { Title, Cards } from '../shared'
-import { RootState } from '../../store/root/reducer'
+import { RootState } from '../../store/reducer/app'
 
 const FiveDayForecast = () => {
 	const { currentCity, loading } = useSelector((state: RootState) => state)

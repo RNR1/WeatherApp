@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import styled from 'styled-components'
 
 import { Navbar, Logo, SideDrawer, DrawerToggle } from '.'
-import { RootState } from '../../store/root/reducer'
+import { RootState } from '../../store/reducer/app'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	const [open, setOpen] = useState(false)

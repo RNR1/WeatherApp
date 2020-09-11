@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Loader from '@material-ui/core/CircularProgress'
 import styled from 'styled-components'
 
-import { RootState } from '../../store/root/reducer'
+import { RootState } from '../../store/reducer/app'
 import { TempIcon, TempUnit } from '../shared'
 import FavoriteIcon from './FavoriteIcon'
 

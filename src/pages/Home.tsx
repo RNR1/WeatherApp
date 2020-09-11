@@ -8,7 +8,7 @@ import {
 	Error,
 	SearchBar
 } from '../components/home'
-import { RootState } from '../store/root/reducer'
+import { RootState } from '../store/reducer/app'
 
 const Home = () => {
 	const { error } = useSelector((state: RootState) => state)

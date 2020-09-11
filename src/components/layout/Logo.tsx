@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { AppState } from '../../store/root/reducer'
+import { AppState } from '../../store/reducer/app'
 
 const Logo = () => {
 	const { darkMode } = useSelector((state: AppState) => state)

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { Cards, Container, Title } from '../components/shared'
 import { Favorite, NoFavorites } from '../components/favorites'
-import { RootState } from '../store/root/reducer'
+import { RootState } from '../store/reducer/app'
 
 const Favorites = () => {
 	const favorites = useSelector((state: RootState) => state.favoriteCities)

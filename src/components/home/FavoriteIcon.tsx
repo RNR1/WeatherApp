@@ -5,7 +5,7 @@ import NotFavorite from '@material-ui/icons/FavoriteBorderOutlined'
 
 import { isFavorite } from '../../store/helpers/favorites'
 import { toggleFavorite } from '../../store/actions/app'
-import { RootState } from '../../store/root/reducer'
+import { RootState } from '../../store/reducer/app'
 
 const FavoriteIcon = () => {
 	const dispatch = useDispatch()

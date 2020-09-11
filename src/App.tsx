@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import Routes from './routes/Routes'
 import Layout from './components/layout/Layout'
 import { geoPosition, search } from './store/actions/app'
-import { RootState } from './store/root/reducer'
+import { RootState } from './store/reducer/app'
 
 function App() {
 	const dispatch = useDispatch()

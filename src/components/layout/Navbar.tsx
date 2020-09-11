@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { NavItem, Switch } from '.'
-import { RootState } from '../../store/root/reducer'
+import { RootState } from '../../store/reducer/app'
 import { toggleDarkMode, toggleTempUnit } from '../../store/actions/app'
 
 const Navbar = () => {

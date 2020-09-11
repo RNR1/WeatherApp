@@ -1,7 +1,7 @@
 import { getPreferredColorTheme } from './darkMode'
 import City from '../../models/City'
 
-export function getInitialUnit(): boolean {
+export function getInitialTempUnit(): boolean {
 	try {
 		const cachedUnit = localStorage.getItem('tempUnit')
 		if (!cachedUnit) throw new Error('No data found')
