@@ -1,25 +1,27 @@
 import React, { useEffect } from 'react'
 import Routes from './routes/Routes'
 import Layout from './components/Layout'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { geoPosition, search } from './store/actions/app'
 import { useLocation } from 'react-router-dom'
+import { RootState } from './store/root/reducer'
 
 function App() {
 	const dispatch = useDispatch()
 	const { pathname } = useLocation()
+	const { currentCity } = useSelector((state: RootState) => state)
 	useEffect(() => {
-		if (pathname === '/')
+		if (pathname === '/' && !currentCity)
 			navigator.geolocation.getCurrentPosition(
 				({ coords: { latitude, longitude } }) => {
 					const coords = { lat: latitude.toString(), lon: longitude.toString() }
 					dispatch(geoPosition(coords))
 				},
-				(error) =>
+				(_: PositionError) =>
 					dispatch(search({ name: 'Tel Aviv', locationKey: '215854' })),
 				{ enableHighAccuracy: true }
 			)
-	}, [dispatch, pathname])
+	}, [dispatch, pathname, currentCity])
 	return (
 		<Layout>
 			<Routes />

@@ -8,29 +8,21 @@ const makeRequestCreator = () => {
 
 	return async (query: string) => {
 		if (cancel) {
-			// Cancel the previous request before making a new request
 			cancel.cancel()
 		}
-		// Create a new CancelToken
 		cancel = Axios.CancelToken.source()
 		try {
 			if (resources[query]) {
-				// Return result if it exists
 				return resources[query]
 			}
 			const result = await client.autocomplete(query, {
 				cancelToken: cancel.token
 			})
-			// Store response
 			resources[query] = result
 
 			return result
 		} catch (error) {
-			if (Axios.isCancel(error)) {
-				// Handle if request was cancelled
-				console.log('Request canceled', error.message)
-			} else {
-				// Handle usual errors
+			if (!Axios.isCancel(error)) {
 				console.log('Something went wrong: ', error.message)
 			}
 		}
