@@ -1,6 +1,6 @@
 import * as Types from './types'
 import City from '../../models/City'
-import { AutocompleteDto, GeoPositionDto } from '../../api/utils'
+import { AutocompleteDto, GeoPositionDto } from '../../api/transform'
 
 export const autoComplete = (payload: string) => ({
 	type: Types.AUTOCOMPLETE,

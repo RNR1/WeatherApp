@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 import City from '../../models/City'
 import * as Types from '../actions/types'
-import { AutocompleteDto } from '../../api/utils'
+import { AutocompleteDto } from '../../api/transform'
 import {
 	isFavorite,
 	removeFromFavorites,

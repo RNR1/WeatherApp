@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import {
 	AutocompleteResponse,
 	currentConditionResponse,
@@ -10,18 +10,18 @@ import {
 	transformCurrentCondition,
 	transformFiveDayForecast,
 	transformGeoPosition
-} from './utils'
+} from './transform'
 const apiKey = process.env.REACT_APP_API_KEY
 
-const client = axios.create({
+export const client = axios.create({
 	baseURL: 'http://dataservice.accuweather.com'
 })
-
 const API = {
-	autocomplete: (q: string) =>
+	autocomplete: (q: string, config?: AxiosRequestConfig) =>
 		client
 			.get<AutocompleteResponse[]>(
-				`/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${q}`
+				`/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${q}`,
+				config
 			)
 			.then(transformAutocomplete),
 	currentCondition: (locationKey: string = '21584') =>

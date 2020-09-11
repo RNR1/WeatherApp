@@ -13,7 +13,8 @@ import {
 } from '../actions/app'
 import API from '../../api/client'
 import City, { Temperature } from '../../models/City'
-import { AutocompleteDto, GeoPositionDto } from '../../api/utils'
+import { AutocompleteDto, GeoPositionDto } from '../../api/transform'
+import { autocomplete } from '../../api/utils'
 
 export function* autoCompleteSaga({
 	payload
@@ -23,7 +24,7 @@ export function* autoCompleteSaga({
 }) {
 	try {
 		yield put(autoCompleteStart())
-		const results: AutocompleteDto[] = yield API.autocomplete(payload)
+		const results: AutocompleteDto[] = yield autocomplete(payload)
 		yield put(autoCompleteSuccess(results))
 	} catch (error) {
 		yield put(autoCompleteFailed(error))
