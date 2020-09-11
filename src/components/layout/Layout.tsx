@@ -1,14 +1,11 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import styled from 'styled-components'
 
-import Navbar from './Navbar'
-import Logo from './Logo'
-import SideDrawer from './SideDrawer'
-import DrawerToggle from './DrawerToggle'
-import { useSelector } from 'react-redux'
-import { RootState } from '../store/root/reducer'
+import { Navbar, Logo, SideDrawer, DrawerToggle } from '.'
+import { RootState } from '../../store/root/reducer'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	const [open, setOpen] = useState(false)

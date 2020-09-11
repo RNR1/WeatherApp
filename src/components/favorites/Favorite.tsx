@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { Card } from '../styles/Cards'
-import City from '../models/City'
-import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { search } from '../store/actions/app'
-import TempUnit from './TemperatureUnit'
+import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+
+import City from '../../models/City'
+import { TempUnit, TempIcon, Card } from '../shared'
+import { search } from '../../store/actions/app'
 
 const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 	const history = useHistory()
@@ -18,17 +18,15 @@ const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 
 	return (
 		<ClickableCard onClick={onClick}>
-			<p>{name}</p>
+			<h3>{name}</h3>
 			{currentCondition && (
 				<>
-					<div>
-						{currentCondition?.icon ? (
-							<img
-								src={`https://developer.accuweather.com/sites/default/files/${currentCondition?.icon}-s.png`}
-								alt={currentCondition?.description}
-							/>
-						) : null}
-					</div>
+					{currentCondition?.icon ? (
+						<TempIcon
+							icon={currentCondition?.icon}
+							description={currentCondition?.description}
+						/>
+					) : null}
 
 					<TempUnit
 						celsius={currentCondition.celsius}

@@ -1,12 +1,11 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Switch from './Switch'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/root/reducer'
-import { toggleDarkMode, toggleTempUnit } from '../store/actions/app'
-import { NavLink } from 'react-router-dom'
-import NavItem from './NavItem'
+import { NavItem, Switch } from '.'
+import { RootState } from '../../store/root/reducer'
+import { toggleDarkMode, toggleTempUnit } from '../../store/actions/app'
 
 const Navbar = () => {
 	const { darkMode, tempUnit } = useSelector((state: RootState) => state)

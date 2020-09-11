@@ -1,13 +1,14 @@
 /* eslint-disable no-use-before-define */
 import React, { ChangeEventHandler } from 'react'
-import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../store/root/reducer'
-import { autoComplete, search, clearResults } from '../store/actions/app'
-import { Button } from '@material-ui/core'
 import styled from 'styled-components'
+
+import { RootState } from '../../store/root/reducer'
+import { autoComplete, search, clearResults } from '../../store/actions/app'
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -19,6 +20,10 @@ function countryToFlag(isoCode: string) {
 					String.fromCodePoint(char.charCodeAt(0) + 127397)
 				)
 		: isoCode
+}
+
+function isAlphabetic(key: string) {
+	return /^[a-zA-Z ]*$/.test(key)
 }
 
 const useStyles = makeStyles({
@@ -98,10 +103,6 @@ export default function SearchBar() {
 			</CustomButton>
 		</div>
 	)
-}
-
-function isAlphabetic(key: string) {
-	return /^[a-zA-Z ]*$/.test(key)
 }
 
 const CustomButton = styled(Button)`

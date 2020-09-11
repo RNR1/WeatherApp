@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Backdrop from './Backdrop'
-import Logo from './Logo'
-import Navbar from './Navbar'
+
+import { Backdrop, Logo, Navbar } from '.'
 
 interface Props {
 	open: boolean

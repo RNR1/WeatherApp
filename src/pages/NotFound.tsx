@@ -1,8 +1,9 @@
 import React from 'react'
-import Lottie from 'react-lottie'
-import { Button, Paper } from '@material-ui/core'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import Lottie from 'react-lottie'
+import { Button } from '@material-ui/core'
+
+import { Container } from '../components/shared'
 import snow from '../animations/snow.json'
 
 const NotFound = () => {
@@ -26,9 +27,3 @@ const NotFound = () => {
 }
 
 export default NotFound
-
-const Container = styled(Paper)`
-	padding: 20px;
-	margin: 10px;
-	text-align: center;
-`

@@ -1,12 +1,25 @@
 import React from 'react'
-import CityDetails from '../components/CityDetails'
-import SearchBar from '../components/SearchBar'
+import { useSelector } from 'react-redux'
+
+import { Container } from '../components/shared'
+import {
+	CurrentCondition,
+	FiveDayForecast,
+	Error,
+	SearchBar
+} from '../components/home'
+import { RootState } from '../store/root/reducer'
 
 const Home = () => {
+	const { error } = useSelector((state: RootState) => state)
+	if (error) return <Error message={error} />
 	return (
 		<>
 			<SearchBar />
-			<CityDetails />
+			<Container elevation={5} square>
+				<CurrentCondition />
+				<FiveDayForecast />
+			</Container>
 		</>
 	)
 }

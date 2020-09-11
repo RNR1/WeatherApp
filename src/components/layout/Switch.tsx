@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
 import Switch from '@material-ui/core/Switch'
+import styled from 'styled-components'
+
 interface Props {
 	checked: boolean
 	icons: string[]

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import Routes from './routes/Routes'
-import Layout from './components/Layout'
 import { useDispatch, useSelector } from 'react-redux'
-import { geoPosition, search } from './store/actions/app'
 import { useLocation } from 'react-router-dom'
+
+import Routes from './routes/Routes'
+import Layout from './components/layout/Layout'
+import { geoPosition, search } from './store/actions/app'
 import { RootState } from './store/root/reducer'
 
 function App() {
