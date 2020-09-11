@@ -3,7 +3,7 @@ import {
 	currentConditionResponse,
 	FiveDayForecastResponse,
 	GeoPositionResponse
-} from '../models/responses'
+} from './responses'
 import { AxiosResponse } from 'axios'
 import Temperature from '../models/Temperature'
 

@@ -4,7 +4,7 @@ import {
 	currentConditionResponse,
 	FiveDayForecastResponse,
 	GeoPositionResponse
-} from '../models/responses'
+} from './responses'
 import {
 	transformAutocomplete,
 	transformCurrentCondition,

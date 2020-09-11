@@ -3,7 +3,7 @@ import Axios, { CancelTokenSource } from 'axios'
 import { AutocompleteDto } from './transform'
 const resources: { [query: string]: AutocompleteDto[] } = {}
 
-const makeRequestCreator = () => {
+const makeCancelableRequest = () => {
 	let cancel: CancelTokenSource
 
 	return async (query: string) => {
@@ -29,4 +29,4 @@ const makeRequestCreator = () => {
 	}
 }
 
-export const autocomplete = makeRequestCreator()
+export const autocomplete = makeCancelableRequest()
