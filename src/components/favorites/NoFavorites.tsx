@@ -15,7 +15,7 @@ const NoFavorites = () => {
 	return (
 		<>
 			<Lottie options={defaultOptions} height={150} width={150} />
-			<h3>You have no favorites yet.</h3>
+			<p>You have no favorites yet</p>
 		</>
 	)
 }
