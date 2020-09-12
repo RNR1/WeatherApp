@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { RootState } from '../../store/reducer/app'
 import { TempIcon, TempUnit } from '../shared'
 import FavoriteIcon from './FavoriteIcon'
+import LocationIcon from './LocationIcon'
 
 const CurrentCondition = () => {
 	const { currentCity, loading } = useSelector((state: RootState) => state)
@@ -32,7 +33,10 @@ const CurrentCondition = () => {
 							<TempUnit celsius={celsius} fahrenheit={fahrenheit} />
 						</div>
 					</div>
-					<FavoriteIcon />
+					<span className='actions'>
+						<LocationIcon />
+						<FavoriteIcon />
+					</span>
 				</Container>
 				<Description>{description}</Description>
 			</>
@@ -61,6 +65,9 @@ const Container = styled.section`
 	& .information {
 		display: flex;
 		align-items: center;
+	}
+	.actions > * {
+		padding: 0.5rem;
 	}
 `
 

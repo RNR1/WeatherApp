@@ -18,9 +18,17 @@ const FavoriteIcon = () => {
 	return (
 		<span>
 			{isFavorite(favoriteCities, currentCity!) ? (
-				<Favorite color='error' onClick={handleFavorite} />
+				<Favorite
+					aria-label='Remove from favorites'
+					color='error'
+					onClick={handleFavorite}
+				/>
 			) : (
-				<NotFavorite color='error' onClick={handleFavorite} />
+				<NotFavorite
+					aria-label='Add to favorites'
+					color='error'
+					onClick={handleFavorite}
+				/>
 			)}
 		</span>
 	)

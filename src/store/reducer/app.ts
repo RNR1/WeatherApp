@@ -50,11 +50,16 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 		case Types.CLEAR_RESULTS:
 			return { ...state, queryResults: [] }
 		case Types.GEOPOSITION_START:
-			return { ...state, loading: true }
+			return { ...state, loading: true, searching: true }
 		case Types.GEOPOSITION_SUCCESS:
-			return { ...state, loading: false, error: null }
+			return { ...state, loading: false, searching: false, error: null }
 		case Types.GEOPOSITION_FAILED:
-			return { ...state, loading: false, error: action.payload }
+			return {
+				...state,
+				loading: false,
+				searching: false,
+				error: action.payload
+			}
 		case Types.SEARCH_START:
 			return { ...state, searching: true }
 		case Types.SEARCH_SUCCESS:
