@@ -31,6 +31,9 @@ const Navbar = () => {
 							checked={tempUnit}
 							onChange={() => dispatch(toggleTempUnit())}
 							icons={['C°', 'F°']}
+							aria-label={`Current temperature unit: ${
+								tempUnit ? 'fahrenheit' : 'celsius'
+							}`}
 						/>
 					</NavItem>
 					<NavItem>
@@ -38,6 +41,7 @@ const Navbar = () => {
 							checked={darkMode}
 							onChange={() => dispatch(toggleDarkMode())}
 							icons={['☀︎', '☾']}
+							aria-label='Dark mode'
 						/>
 					</NavItem>
 				</List>

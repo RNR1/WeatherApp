@@ -32,9 +32,7 @@ const CurrentCondition = () => {
 							<TempUnit celsius={celsius} fahrenheit={fahrenheit} />
 						</div>
 					</div>
-					<div>
-						<FavoriteIcon />
-					</div>
+					<FavoriteIcon />
 				</Container>
 				<Description>{description}</Description>
 			</>
