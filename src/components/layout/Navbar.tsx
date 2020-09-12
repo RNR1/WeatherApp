@@ -11,9 +11,9 @@ const Navbar = () => {
 	const { darkMode, tempUnit } = useSelector((state: RootState) => state)
 	const dispatch = useDispatch()
 	return (
-		<nav>
-			<List darkMode={darkMode}>
-				<section>
+		<Nav darkMode={darkMode}>
+			<section>
+				<List>
 					<NavItem>
 						<NavLink exact to='/'>
 							Home
@@ -22,8 +22,10 @@ const Navbar = () => {
 					<NavItem>
 						<NavLink to='/favorites'>Favorites</NavLink>
 					</NavItem>
-				</section>
-				<section>
+				</List>
+			</section>
+			<section>
+				<List>
 					<NavItem>
 						<Switch
 							checked={tempUnit}
@@ -38,30 +40,15 @@ const Navbar = () => {
 							icons={['☀︎', '☾']}
 						/>
 					</NavItem>
-				</section>
-			</List>
-		</nav>
+				</List>
+			</section>
+		</Nav>
 	)
 }
 
 export default Navbar
 
-const List = styled.ul<{ darkMode: boolean }>`
-	font-size: 1.3em;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	justify-content: space-around;
-	height: 100%;
-	width: 100%;
-
-	& section {
-		width: 100%;
-	}
-
+const Nav = styled.nav<{ darkMode: boolean }>`
 	& a {
 		color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
 		text-decoration: none;
@@ -78,13 +65,8 @@ const List = styled.ul<{ darkMode: boolean }>`
 	}
 
 	@media (min-width: 500px) {
-		font-size: 1em;
-		flex-flow: row;
-
-		& section {
-			display: flex;
-			width: auto;
-		}
+		display: flex;
+		justify-content: space-around;
 
 		& a {
 			color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
@@ -99,5 +81,22 @@ const List = styled.ul<{ darkMode: boolean }>`
 			border-bottom: 4px solid #e0ece4;
 			color: #e0ece4;
 		}
+	}
+`
+
+const List = styled.ul`
+	font-size: 1.3em;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+
+	@media (min-width: 500px) {
+		font-size: 1em;
+		flex-flow: row;
 	}
 `
