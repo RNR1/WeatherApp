@@ -23,7 +23,7 @@ const makeCancelableRequest = () => {
 			return result
 		} catch (error) {
 			if (!Axios.isCancel(error)) {
-				console.log('Something went wrong: ', error.message)
+				throw error
 			}
 		}
 	}

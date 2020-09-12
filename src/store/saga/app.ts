@@ -1,21 +1,11 @@
 import { put } from 'redux-saga/effects'
-import {
-	autoCompleteStart,
-	autoCompleteSuccess,
-	autoCompleteFailed,
-	searchStart,
-	searchSuccess,
-	searchFailed,
-	geoPositionFailed,
-	geoPositionStart,
-	geoPositionSuccess,
-	search
-} from '../actions/app'
+
+import * as Actions from '../actions/app'
 import API from '../../api/client'
+import { autocomplete } from '../../api/utils'
 import City from '../../models/City'
 import Temperature from '../../models/Temperature'
 import { AutocompleteDto, GeoPositionDto } from '../../api/transform'
-import { autocomplete } from '../../api/utils'
 
 export function* autoCompleteSaga({
 	payload
@@ -24,11 +14,11 @@ export function* autoCompleteSaga({
 	payload: string
 }) {
 	try {
-		yield put(autoCompleteStart())
+		yield put(Actions.autoCompleteStart())
 		const results: AutocompleteDto[] = yield autocomplete(payload)
-		yield put(autoCompleteSuccess(results))
+		yield put(Actions.autoCompleteSuccess(results))
 	} catch (error) {
-		yield put(autoCompleteFailed(error))
+		yield put(Actions.autoCompleteFailed(error))
 	}
 }
 
@@ -39,12 +29,12 @@ export function* geoPositionSaga({
 	payload: { lat: string; lon: string }
 }) {
 	try {
-		yield put(geoPositionStart())
+		yield put(Actions.geoPositionStart())
 		const results: GeoPositionDto = yield API.geoPosition(payload)
-		yield put(geoPositionSuccess())
-		yield put(search(results))
+		yield put(Actions.geoPositionSuccess())
+		yield put(Actions.search(results))
 	} catch (error) {
-		yield put(geoPositionFailed(error))
+		yield put(Actions.geoPositionFailed(error))
 	}
 }
 
@@ -55,7 +45,7 @@ export function* searchSaga({
 	payload: AutocompleteDto
 }) {
 	try {
-		yield put(searchStart())
+		yield put(Actions.searchStart())
 		const [currentCondition, fiveDayForecast]: [
 			Temperature,
 			Temperature[]
@@ -70,8 +60,8 @@ export function* searchSaga({
 			currentCondition,
 			fiveDayForecast
 		)
-		yield put(searchSuccess(currentCity))
+		yield put(Actions.searchSuccess(currentCity))
 	} catch (error) {
-		yield put(searchFailed(error))
+		yield put(Actions.searchFailed(error))
 	}
 }
