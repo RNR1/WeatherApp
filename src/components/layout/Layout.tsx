@@ -6,10 +6,12 @@ import styled from 'styled-components'
 
 import { Navbar, Logo, SideDrawer, DrawerToggle } from '.'
 import { RootState } from '../../store/reducer/app'
+import { useHistory } from 'react-router-dom'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	const [open, setOpen] = useState(false)
 	const { darkMode } = useSelector((state: RootState) => state)
+	const history = useHistory()
 
 	const theme = React.useMemo(
 		() =>
@@ -33,7 +35,7 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 					darkMode={darkMode}
 					onClick={() => setOpen((prev) => !prev)}
 				/>
-				<Logo />
+				<Logo onClick={() => history.push('/')} />
 				<Navbar />
 			</Header>
 			<Main>{children}</Main>
@@ -69,6 +71,7 @@ const Header = styled.header<{ darkMode: boolean }>`
 
 	& .Logo {
 		height: 80%;
+		cursor: pointer;
 	}
 
 	@media (max-width: 499px) {

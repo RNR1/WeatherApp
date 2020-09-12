@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -7,7 +7,7 @@ import { NavItem, Switch } from '.'
 import { RootState } from '../../store/reducer/app'
 import { toggleDarkMode, toggleTempUnit } from '../../store/actions/app'
 
-const Navbar = () => {
+const Navbar: FC<{ close?: () => void }> = ({ close }) => {
 	const { darkMode, tempUnit } = useSelector((state: RootState) => state)
 	const dispatch = useDispatch()
 	return (
@@ -15,12 +15,14 @@ const Navbar = () => {
 			<section>
 				<List>
 					<NavItem>
-						<NavLink exact to='/'>
+						<NavLink onClick={close} exact to='/'>
 							Home
 						</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink to='/favorites'>Favorites</NavLink>
+						<NavLink onClick={close} to='/favorites'>
+							Favorites
+						</NavLink>
 					</NavItem>
 				</List>
 			</section>

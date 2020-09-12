@@ -15,7 +15,7 @@ const SideDrawer: FC<Props> = ({ open, close, darkMode }) => {
 			<Backdrop show={open} onClick={close} />
 			<Drawer open={open} darkMode={darkMode}>
 				<Logo />
-				<Navbar />
+				<Navbar close={close} />
 			</Drawer>
 		</>
 	)

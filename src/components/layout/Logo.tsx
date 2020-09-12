@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import { AppState } from '../../store/reducer/app'
 
-const Logo = () => {
+const Logo: FC<{ onClick?: () => void }> = ({ onClick }) => {
 	const { darkMode } = useSelector((state: AppState) => state)
 	return (
-		<LogoContainer darkMode={darkMode} className='Logo'>
+		<LogoContainer darkMode={darkMode} className='Logo' onClick={onClick}>
 			<span role='img' aria-label='Weather Logo'>
 				🌤️
 			</span>
