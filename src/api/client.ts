@@ -14,7 +14,7 @@ import {
 const apiKey = process.env.REACT_APP_API_KEY
 
 export const client = axios.create({
-	baseURL: 'http://dataservice.accuweather.com'
+	baseURL: 'https://dataservice.accuweather.com'
 })
 const API = {
 	autocomplete: (q: string, config?: AxiosRequestConfig) =>
