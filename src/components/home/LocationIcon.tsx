@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import Tooltip from '@material-ui/core/Tooltip'
 import MyLocationIcon from '@material-ui/icons/MyLocation'
+
 import { geoPosition } from '../../store/actions/app'
 
 const LocationIcon = () => {
 	const [color, setColor] = useState<'primary' | 'error'>('error')
+	const title = 'Search by location'
 	const dispatch = useDispatch()
 
 	const enableLocation = () => {
@@ -23,13 +25,13 @@ const LocationIcon = () => {
 	}
 
 	return (
-		<span>
+		<Tooltip title={title}>
 			<MyLocationIcon
-				aria-label='Search by location'
+				aria-label={title}
 				color={color}
 				onClick={enableLocation}
 			/>
-		</span>
+		</Tooltip>
 	)
 }
 
