@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const NavItem = styled.li`
-	margin: 10px 0;
-	padding: 0 5px;
+	margin: 0.625rem 0;
+	padding: 0 0.3125rem;
 	box-sizing: border-box;
 	display: block;
 	width: 100%;

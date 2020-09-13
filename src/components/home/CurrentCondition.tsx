@@ -67,6 +67,7 @@ const Container = styled.section`
 		align-items: center;
 	}
 	.actions > * {
+		font-size: 2.6rem;
 		padding: 0.5rem;
 	}
 `

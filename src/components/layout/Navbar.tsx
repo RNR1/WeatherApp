@@ -77,7 +77,7 @@ const Nav = styled.nav<{ darkMode: boolean }>`
 		& a {
 			color: ${({ darkMode }) => (darkMode ? 'white' : 'black')};
 			height: 100%;
-			padding: 16px 10px;
+			padding: 1rem 0.8rem;
 			border-bottom: 4px solid transparent;
 		}
 

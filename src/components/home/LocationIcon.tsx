@@ -6,8 +6,10 @@ import MyLocationIcon from '@material-ui/icons/MyLocation'
 import { geoPosition } from '../../store/actions/app'
 
 const LocationIcon = () => {
-	const [color, setColor] = useState<'primary' | 'error'>('error')
-	const title = 'Search by location'
+	const [color, setColor] = useState<'primary' | 'error'>(
+		navigator.geolocation ? 'primary' : 'error'
+	)
+	const title = 'Search by your location'
 	const dispatch = useDispatch()
 
 	const enableLocation = () => {

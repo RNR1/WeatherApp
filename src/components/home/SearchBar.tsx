@@ -90,7 +90,8 @@ export default function SearchBar() {
 						variant='outlined'
 						inputProps={{
 							...params.inputProps,
-							autoComplete: 'new-password' // disable autocomplete and autofill
+							autoComplete: 'new-password', // disable autocomplete and autofill
+							type: 'search'
 						}}
 					/>
 				)}

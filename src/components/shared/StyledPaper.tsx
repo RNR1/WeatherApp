@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { Paper } from '@material-ui/core'
 
 const StyledPaper = styled(Paper)`
-	padding: 20px;
-	margin: 10px;
+	padding: 1.25rem;
+	margin: 0.625rem;
 	text-align: center;
 `
 

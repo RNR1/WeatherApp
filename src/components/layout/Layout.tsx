@@ -46,12 +46,12 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 export default Layout
 
 const Main = styled.main`
-	margin: 60px auto;
+	margin: 3.75rem auto;
 	max-width: 960px;
 `
 
 const Header = styled.header<{ darkMode: boolean }>`
-	height: 56px;
+	height: 3.5rem;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -60,7 +60,7 @@ const Header = styled.header<{ darkMode: boolean }>`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 0 20px;
+	padding: 0 1.25rem;
 	box-sizing: border-box;
 	z-index: 90;
 

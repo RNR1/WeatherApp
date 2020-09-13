@@ -19,8 +19,8 @@ export default Logo
 
 const LogoContainer = styled.div<{ darkMode: boolean }>`
 	background-color: ${({ darkMode }) => (darkMode ? '#52575d' : 'white')};
-	padding: 8px;
-	font-size: 34px;
+	padding: 0.5rem;
+	font-size: 2.125rem;
 	height: 100%;
 	display: flex;
 	justify-content: center;
