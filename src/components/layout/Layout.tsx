@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import styled from 'styled-components'
 
 import { Navbar, Logo, SideDrawer, DrawerToggle } from '.'
-import { RootState } from '../../store/reducer/app'
+import { RootState } from '../../store/reducer/root'
 import { useHistory } from 'react-router-dom'
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {

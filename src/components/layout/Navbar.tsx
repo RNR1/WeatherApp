@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { NavItem, Switch } from '.'
-import { RootState } from '../../store/reducer/app'
+import { RootState } from '../../store/reducer/root'
 import { toggleDarkMode, toggleTempUnit } from '../../store/actions/app'
 
 const Navbar: FC<{ close?: () => void }> = ({ close }) => {

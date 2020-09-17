@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
-import { RootState } from '../../store/reducer/app'
+import { RootState } from '../../store/reducer/root'
 import { autoComplete, search, clearResults } from '../../store/actions/app'
 
 // ISO 3166-1 alpha-2

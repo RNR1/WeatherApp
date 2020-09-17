@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../store/reducer/app'
+import { RootState } from '../../store/reducer/root'
 import Temperature from '../../models/Temperature'
 
 const TempUnit: FC<Partial<Temperature>> = ({ celsius, fahrenheit }) => {

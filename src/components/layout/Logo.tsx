@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { AppState } from '../../store/reducer/app'
+import { AppState } from '../../store/reducer/root'
 
 const Logo: FC<{ onClick?: () => void }> = ({ onClick }) => {
 	const { darkMode } = useSelector((state: AppState) => state)

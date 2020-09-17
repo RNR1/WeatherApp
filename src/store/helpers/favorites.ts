@@ -1,5 +1,5 @@
 import City from '../../models/City'
-import { AppState } from '../reducer/app'
+import { AppState } from '../reducer/root'
 import * as cache from './cache'
 
 export function addToFavorites(state: AppState): City[] {
