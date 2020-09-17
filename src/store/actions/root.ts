@@ -66,6 +66,11 @@ export const toggleFavorite = () => ({
 	type: Types.TOGGLE_FAVORITE
 })
 
+export const toggleFavoriteSuccess = (payload: City[]) => ({
+	type: Types.TOGGLE_FAVORITE_SUCCESS,
+	payload
+})
+
 export const toggleDarkMode = () => ({
 	type: Types.TOGGLE_DARK_MODE
 })

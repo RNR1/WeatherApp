@@ -15,5 +15,7 @@ export const SEARCH_SUCCESS = 'App/searchSuccess'
 export const SEARCH_FAILED = 'App/searchFailed'
 
 export const TOGGLE_FAVORITE = 'App/toggleFavorite'
+export const TOGGLE_FAVORITE_SUCCESS = 'App/toggleFavoriteSuccess'
+
 export const TOGGLE_DARK_MODE = 'App/toggleDarkMode'
 export const TOGGLE_TEMP_UNIT = 'App/toggleTempUnit'

@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects'
+import { put, select } from 'redux-saga/effects'
 
 import * as Actions from '../actions/root'
 import API from '../../api/client'
@@ -6,6 +6,13 @@ import { autocomplete } from '../../api/utils'
 import City from '../../models/City'
 import Temperature from '../../models/Temperature'
 import { AutocompleteDto, GeoPositionDto } from '../../api/transform'
+import { RootState } from '../reducer/root'
+import {
+	addToFavorites,
+	isFavorite,
+	removeFromFavorites
+} from '../helpers/favorites'
+import * as cache from '../helpers/cache'
 
 export function* autoCompleteSaga({
 	payload
@@ -64,4 +71,14 @@ export function* searchSaga({
 	} catch (error) {
 		yield put(Actions.searchFailed(error))
 	}
+}
+
+export function* toggleFavoriteSaga() {
+	const state: RootState = yield select()
+	const { favoriteCities, currentCity } = state
+	const updatedFavorites = yield isFavorite(favoriteCities, currentCity!)
+		? removeFromFavorites(state)
+		: addToFavorites(state)
+	yield cache.set('favorites', updatedFavorites)
+	yield put(Actions.toggleFavoriteSuccess(updatedFavorites))
 }

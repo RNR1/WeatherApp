@@ -2,11 +2,6 @@ import { Reducer } from 'redux'
 import City from '../../models/City'
 import * as Types from '../actions/types'
 import { AutocompleteDto } from '../../api/transform'
-import {
-	isFavorite,
-	removeFromFavorites,
-	addToFavorites
-} from '../helpers/favorites'
 import * as cache from '../helpers/cache'
 
 export interface AppState {
@@ -71,12 +66,10 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 			}
 		case Types.SEARCH_FAILED:
 			return { ...state, searching: false, error: action.payload }
-		case Types.TOGGLE_FAVORITE:
+		case Types.TOGGLE_FAVORITE_SUCCESS:
 			return {
 				...state,
-				favoriteCities: isFavorite(state.favoriteCities, state.currentCity!)
-					? removeFromFavorites(state)
-					: addToFavorites(state)
+				favoriteCities: action.payload
 			}
 		case Types.TOGGLE_DARK_MODE:
 			cache.set('dark', !state.darkMode)
