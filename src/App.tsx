@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import Routes from './routes/Routes'
 import Layout from './components/layout/Layout'
-import { search } from './store/actions/app'
+import { search } from './store/actions/root'
 import { DEFAULT_CITY, DEFAULT_LOCATION_KEY } from './config/consts'
 
 function App() {

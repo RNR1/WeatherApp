@@ -5,7 +5,7 @@ import Favorite from '@material-ui/icons/Favorite'
 import NotFavorite from '@material-ui/icons/FavoriteBorderOutlined'
 
 import { isFavorite } from '../../store/helpers/favorites'
-import { toggleFavorite } from '../../store/actions/app'
+import { toggleFavorite } from '../../store/actions/root'
 import { RootState } from '../../store/reducer/root'
 
 interface Props {

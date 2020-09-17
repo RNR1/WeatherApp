@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects'
 
-import * as Actions from '../actions/app'
+import * as Actions from '../actions/root'
 import API from '../../api/client'
 import { autocomplete } from '../../api/utils'
 import City from '../../models/City'

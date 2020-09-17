@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import City from '../../models/City'
 import { TempUnit, TempIcon, Card } from '../shared'
-import { search } from '../../store/actions/app'
+import { search } from '../../store/actions/root'
 
 const Favorite: FC<City> = ({ currentCondition, name, locationKey }) => {
 	const history = useHistory()

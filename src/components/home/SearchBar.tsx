@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 
 import { RootState } from '../../store/reducer/root'
-import { autoComplete, search, clearResults } from '../../store/actions/app'
+import { autoComplete, search, clearResults } from '../../store/actions/root'
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11

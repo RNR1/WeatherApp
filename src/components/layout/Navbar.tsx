@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { NavItem, Switch } from '.'
 import { RootState } from '../../store/reducer/root'
-import { toggleDarkMode, toggleTempUnit } from '../../store/actions/app'
+import { toggleDarkMode, toggleTempUnit } from '../../store/actions/root'
 
 const Navbar: FC<{ close?: () => void }> = ({ close }) => {
 	const { darkMode, tempUnit } = useSelector((state: RootState) => state)

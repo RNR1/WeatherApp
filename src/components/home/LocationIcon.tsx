@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import Tooltip from '@material-ui/core/Tooltip'
 import MyLocationIcon from '@material-ui/icons/MyLocation'
 
-import { geoPosition } from '../../store/actions/app'
+import { geoPosition } from '../../store/actions/root'
 
 const LocationIcon = () => {
 	const [color, setColor] = useState<'primary' | 'error'>(
