@@ -1,15 +1,11 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects'
 import * as Types from '../actions/types'
-import {
-	autoCompleteSaga,
-	searchSaga,
-	geoPositionSaga,
-	toggleFavoriteSaga
-} from './root'
+import * as Sagas from './root'
 
 export default function* rootSaga() {
-	yield takeLatest(Types.AUTOCOMPLETE, autoCompleteSaga)
-	yield takeLatest(Types.GEOPOSITION, geoPositionSaga)
-	yield takeLatest(Types.SEARCH, searchSaga)
-	yield takeEvery(Types.TOGGLE_FAVORITE, toggleFavoriteSaga)
+	yield takeLatest(Types.AUTOCOMPLETE, Sagas.autoCompleteSaga)
+	yield takeLatest(Types.GEOPOSITION, Sagas.geoPositionSaga)
+	yield takeLatest(Types.SEARCH, Sagas.searchSaga)
+	yield takeEvery(Types.TOGGLE_FAVORITE, Sagas.toggleFavoriteSaga)
+	yield takeEvery(Types.TOGGLE_DARK_MODE, Sagas.toggleDarkModeSaga)
 }

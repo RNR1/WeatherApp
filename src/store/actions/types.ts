@@ -18,4 +18,6 @@ export const TOGGLE_FAVORITE = 'App/toggleFavorite'
 export const TOGGLE_FAVORITE_SUCCESS = 'App/toggleFavoriteSuccess'
 
 export const TOGGLE_DARK_MODE = 'App/toggleDarkMode'
+export const TOGGLE_DARK_MODE_SUCCESS = 'App/toggleDarkModeSuccess'
+
 export const TOGGLE_TEMP_UNIT = 'App/toggleTempUnit'

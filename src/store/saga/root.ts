@@ -82,3 +82,9 @@ export function* toggleFavoriteSaga() {
 	yield cache.set('favorites', updatedFavorites)
 	yield put(Actions.toggleFavoriteSuccess(updatedFavorites))
 }
+
+export function* toggleDarkModeSaga() {
+	const { darkMode }: RootState = yield select()
+	cache.set('dark', !darkMode)
+	yield put(Actions.toggleDarkModeSuccess(!darkMode))
+}
