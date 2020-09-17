@@ -19,8 +19,8 @@ const configureStore = () => {
 const store = configureStore()
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-	module.hot.accept('./reducer/app.ts', () => {
-		const newRootReducer = require('./reducer/app').default
+	module.hot.accept('./reducer/root.ts', () => {
+		const newRootReducer = require('./reducer/root.ts').default
 		store.replaceReducer(newRootReducer)
 	})
 }

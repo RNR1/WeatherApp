@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects'
 import * as Types from '../actions/types'
-import { autoCompleteSaga, searchSaga, geoPositionSaga } from './app'
+import { autoCompleteSaga, searchSaga, geoPositionSaga } from './root'
 
 export default function* rootSaga() {
 	yield takeLatest(Types.AUTOCOMPLETE, autoCompleteSaga)
