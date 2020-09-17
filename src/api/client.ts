@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import { DEFAULT_LOCATION_KEY } from '../config/consts'
 import {
 	AutocompleteResponse,
 	currentConditionResponse,
@@ -24,13 +25,13 @@ const API = {
 				config
 			)
 			.then(transformAutocomplete),
-	currentCondition: (locationKey: string = '21584') =>
+	currentCondition: (locationKey: string = DEFAULT_LOCATION_KEY) =>
 		client
 			.get<currentConditionResponse[]>(
 				`/currentconditions/v1/${locationKey}?apikey=${apiKey}`
 			)
 			.then(transformCurrentCondition),
-	fiveDayForecast: (locationKey: string = '21584') =>
+	fiveDayForecast: (locationKey: string = DEFAULT_LOCATION_KEY) =>
 		client
 			.get<FiveDayForecastResponse>(
 				`/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&metric=true`
