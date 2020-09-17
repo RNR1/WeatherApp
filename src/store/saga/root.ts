@@ -88,3 +88,9 @@ export function* toggleDarkModeSaga() {
 	cache.set('dark', !darkMode)
 	yield put(Actions.toggleDarkModeSuccess(!darkMode))
 }
+
+export function* toggleTempUnitSaga() {
+	const { tempUnit }: RootState = yield select()
+	cache.set('tempUnit', !tempUnit)
+	yield put(Actions.toggleTempUnitSuccess(!tempUnit))
+}

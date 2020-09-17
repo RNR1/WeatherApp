@@ -8,4 +8,5 @@ export default function* rootSaga() {
 	yield takeLatest(Types.SEARCH, Sagas.searchSaga)
 	yield takeEvery(Types.TOGGLE_FAVORITE, Sagas.toggleFavoriteSaga)
 	yield takeEvery(Types.TOGGLE_DARK_MODE, Sagas.toggleDarkModeSaga)
+	yield takeEvery(Types.TOGGLE_TEMP_UNIT, Sagas.toggleTempUnitSaga)
 }

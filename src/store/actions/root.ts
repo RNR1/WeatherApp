@@ -83,3 +83,8 @@ export const toggleDarkModeSuccess = (payload: boolean) => ({
 export const toggleTempUnit = () => ({
 	type: Types.TOGGLE_TEMP_UNIT
 })
+
+export const toggleTempUnitSuccess = (payload: boolean) => ({
+	type: Types.TOGGLE_TEMP_UNIT_SUCCESS,
+	payload
+})

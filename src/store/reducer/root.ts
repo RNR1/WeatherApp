@@ -73,9 +73,8 @@ const rootReducer: Reducer<AppState, { type: string; payload: any }> = (
 			}
 		case Types.TOGGLE_DARK_MODE_SUCCESS:
 			return { ...state, darkMode: action.payload }
-		case Types.TOGGLE_TEMP_UNIT:
-			cache.set('tempUnit', !state.tempUnit)
-			return { ...state, tempUnit: !state.tempUnit }
+		case Types.TOGGLE_TEMP_UNIT_SUCCESS:
+			return { ...state, tempUnit: action.payload }
 		default:
 			return state
 	}

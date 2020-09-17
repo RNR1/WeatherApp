@@ -21,3 +21,4 @@ export const TOGGLE_DARK_MODE = 'App/toggleDarkMode'
 export const TOGGLE_DARK_MODE_SUCCESS = 'App/toggleDarkModeSuccess'
 
 export const TOGGLE_TEMP_UNIT = 'App/toggleTempUnit'
+export const TOGGLE_TEMP_UNIT_SUCCESS = 'App/toggleTempUnitSuccess'
