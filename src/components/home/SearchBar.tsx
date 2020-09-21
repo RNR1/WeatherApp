@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { ChangeEventHandler } from 'react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -9,22 +9,6 @@ import styled from 'styled-components'
 
 import { RootState } from '../../store/reducer/root'
 import { autoComplete, search, clearResults } from '../../store/actions/root'
-
-// ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
-function countryToFlag(isoCode: string) {
-	return typeof String.fromCodePoint !== 'undefined'
-		? isoCode
-				.toUpperCase()
-				.replace(/./g, (char) =>
-					String.fromCodePoint(char.charCodeAt(0) + 127397)
-				)
-		: isoCode
-}
-
-function isAlphabetic(key: string) {
-	return /^[a-zA-Z ]*$/.test(key)
-}
 
 const useStyles = makeStyles({
 	option: {
@@ -43,6 +27,9 @@ const useStyles = makeStyles({
 export default function SearchBar() {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+
+	const [searchQuery, setSearchQuery] = useState('')
+	const debouncedQuery = useDebounce(searchQuery, 300)
 	const { queryResults, searching, loading, error } = useSelector(
 		(state: RootState) => state
 	)
@@ -59,8 +46,12 @@ export default function SearchBar() {
 
 	const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
 		if (!target.value) return dispatch(clearResults())
-		dispatch(autoComplete(target.value))
+		setSearchQuery(target.value)
 	}
+
+	useEffect(() => {
+		if (debouncedQuery) dispatch(autoComplete(debouncedQuery))
+	}, [debouncedQuery, dispatch])
 
 	if (error) return null
 
@@ -111,3 +102,39 @@ const CustomButton = styled(Button)`
 		display: none;
 	}
 `
+
+// ISO 3166-1 alpha-2
+// ⚠️ No support for IE 11
+function countryToFlag(isoCode: string) {
+	return typeof String.fromCodePoint !== 'undefined'
+		? isoCode
+				.toUpperCase()
+				.replace(/./g, (char) =>
+					String.fromCodePoint(char.charCodeAt(0) + 127397)
+				)
+		: isoCode
+}
+
+function isAlphabetic(key: string) {
+	return /^[a-zA-Z ]*$/.test(key)
+}
+
+function useDebounce(value: string, delay: number) {
+	const [debouncedValue, setDebouncedValue] = useState(value)
+
+	useEffect(
+		() => {
+			const handler = setTimeout(() => {
+				setDebouncedValue(value)
+			}, delay)
+
+			return () => {
+				clearTimeout(handler)
+			}
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[value]
+	)
+
+	return debouncedValue
+}
