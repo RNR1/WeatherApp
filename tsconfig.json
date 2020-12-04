@@ -1,25 +1,35 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"baseUrl": "src",
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": ["src"],
+	"eslintConfig": {
+		"extends": ["react-app"],
+		"rules": {
+			"@typescript-eslint/no-use-before-define": "off"
+		},
+		"overrides": [
+			{
+				"files": ["**/*.ts?(x)"],
+				"rules": {
+					"@typescript-eslint/no-use-before-define": "off"
+				}
+			}
+		]
+	}
 }

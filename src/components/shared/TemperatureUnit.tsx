@@ -1,16 +1,14 @@
-import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/reducer/root'
-import Temperature from '../../models/Temperature'
+import useSelector from 'store/typedSelector';
+import Temperature from 'models/Temperature';
 
-const TempUnit: FC<Partial<Temperature>> = ({ celsius, fahrenheit }) => {
-	const { tempUnit } = useSelector((state: RootState) => state)
+const TempUnit: React.FC<Partial<Temperature>> = ({ celsius, fahrenheit }) => {
+  const { tempUnit } = useSelector(state => state);
 
-	return (
-		<p>
-			{tempUnit ? `${fahrenheit?.toFixed(1)}° F` : `${celsius?.toFixed(1)}° C`}
-		</p>
-	)
-}
+  return (
+    <p>
+      {tempUnit ? `${fahrenheit?.toFixed(1)}° F` : `${celsius?.toFixed(1)}° C`}
+    </p>
+  );
+};
 
-export default TempUnit
+export default TempUnit;

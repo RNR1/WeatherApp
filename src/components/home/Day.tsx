@@ -1,24 +1,20 @@
-import React, { FC } from 'react'
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
+import Temperature from 'models/Temperature';
+import { TempIcon, TempUnit, Card } from 'components/shared';
 
-import Temperature from '../../models/Temperature'
-import { TempIcon, TempUnit, Card } from '../shared'
+const Day: React.FC<Temperature> = ({
+  date,
+  icon,
+  description,
+  celsius,
+  fahrenheit,
+}) => (
+  <Card>
+    <h3>{dayjs(date).format('ddd')}</h3>
+    <TempIcon icon={icon} description={description} />
+    <TempUnit celsius={celsius} fahrenheit={fahrenheit} />
+    <p>{description}</p>
+  </Card>
+);
 
-const Day: FC<Temperature> = ({
-	date,
-	icon,
-	description,
-	celsius,
-	fahrenheit
-}) => {
-	return (
-		<Card>
-			<h3>{dayjs(date).format('ddd')}</h3>
-			<TempIcon icon={icon} description={description} />
-			<TempUnit celsius={celsius} fahrenheit={fahrenheit} />
-			<p>{description}</p>
-		</Card>
-	)
-}
-
-export default Day
+export default Day;

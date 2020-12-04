@@ -1,27 +1,19 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
-import { Container } from '../components/shared'
-import {
-	CurrentCondition,
-	FiveDayForecast,
-	Error,
-	SearchBar
-} from '../components/home'
-import { RootState } from '../store/reducer/root'
+import useSelector from 'store/typedSelector';
+import * as Section from 'components/home';
+import { Container } from 'components/shared';
 
 const Home = () => {
-	const { error } = useSelector((state: RootState) => state)
-	if (error) return <Error message={error} />
-	return (
-		<>
-			<SearchBar />
-			<Container elevation={5} square>
-				<CurrentCondition />
-				<FiveDayForecast />
-			</Container>
-		</>
-	)
-}
+  const { error } = useSelector(state => state);
+  if (error) return <Section.Error message={error} />;
+  return (
+    <>
+      <Section.SearchBar />
+      <Container elevation={5} square>
+        <Section.CurrentCondition />
+        <Section.FiveDayForecast />
+      </Container>
+    </>
+  );
+};
 
-export default Home
+export default Home;

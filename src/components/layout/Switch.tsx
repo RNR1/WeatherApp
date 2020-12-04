@@ -1,41 +1,45 @@
-import React, { FC } from 'react'
-import Switch from '@material-ui/core/Switch'
-import styled from 'styled-components'
+import Switch from '@material-ui/core/Switch';
+import styled from 'styled-components';
 
 interface Props {
-	checked: boolean
-	icons: string[]
-	onChange: () => void
+  checked: boolean;
+  icons: string[];
+  onChange: () => void;
 }
 
-const Toggle: FC<Props> = ({ checked, onChange, icons: [L, R], ...props }) => (
-	<Container onClick={onChange}>
-		<span>{L}</span>
-		<Switch
-			checked={checked}
-			inputProps={{ ...props, 'aria-checked': checked }}
-		/>
-		<span>{R}</span>
-	</Container>
-)
+const Toggle: React.FC<Props> = ({
+  checked,
+  onChange,
+  icons: [L, R],
+  ...props
+}) => (
+  <Container onClick={onChange}>
+    <span>{L}</span>
+    <Switch
+      checked={checked}
+      inputProps={{ ...props, 'aria-checked': checked }}
+    />
+    <span>{R}</span>
+  </Container>
+);
 
-export default Toggle
+export default Toggle;
 
 const Container = styled.div`
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 
-	& > span {
-		font-size: 1.2em;
-		background: none;
-		border: none;
-		cursor: pointer;
-		transition: color 0.3s ease;
-		margin-top: 4px;
-		margin-right: 2px;
-	}
+  & > span {
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-top: 4px;
+    margin-right: 2px;
+  }
 
-	& > span:last-child {
-		margin-top: 5px;
-	}
-`
+  & > span:last-child {
+    margin-top: 5px;
+  }
+`;

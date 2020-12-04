@@ -1,26 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
-import { Cards, Container, Title } from '../components/shared'
-import { Favorite, NoFavorites } from '../components/favorites'
-import { RootState } from '../store/reducer/root'
+import useSelector from 'store/typedSelector';
+import { Cards, Container, Title } from 'components/shared';
+import { Favorite, NoFavorites } from 'components/favorites';
 
 const Favorites = () => {
-	const favorites = useSelector((state: RootState) => state.favoriteCities)
-	return (
-		<Container elevation={5} square>
-			<Title>Favorites</Title>
-			{favorites.length ? (
-				<Cards>
-					{favorites?.map((city) => (
-						<Favorite key={city.locationKey} {...city} />
-					))}
-				</Cards>
-			) : (
-				<NoFavorites />
-			)}
-		</Container>
-	)
-}
+  const favorites = useSelector(state => state.favoriteCities);
+  return (
+    <Container elevation={5} square>
+      <Title>Favorites</Title>
+      {favorites.length ? (
+        <Cards>
+          {favorites?.map(city => (
+            <Favorite key={city.locationKey} {...city} />
+          ))}
+        </Cards>
+      ) : (
+        <NoFavorites />
+      )}
+    </Container>
+  );
+};
 
-export default Favorites
+export default Favorites;

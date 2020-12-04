@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import Routes from './routes/Routes'
-import Layout from './components/layout/Layout'
-import { search } from './store/actions/root'
-import { DEFAULT_CITY, DEFAULT_LOCATION_KEY } from './config/consts'
+import Routes from 'routes/Routes';
+import Layout from 'components/layout/Layout';
+import { search } from 'store/actions/root';
+import { DEFAULT_CITY, DEFAULT_LOCATION_KEY } from 'config/consts';
 
 function App() {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(search({ name: DEFAULT_CITY, locationKey: DEFAULT_LOCATION_KEY }))
-	}, [dispatch])
+  useEffect(() => {
+    dispatch(search({ name: DEFAULT_CITY, locationKey: DEFAULT_LOCATION_KEY }));
+  }, [dispatch]);
 
-	return (
-		<Layout>
-			<Routes />
-		</Layout>
-	)
+  return (
+    <Layout>
+      <Routes />
+    </Layout>
+  );
 }
 
-export default App
+export default App;
