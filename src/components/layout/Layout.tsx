@@ -1,16 +1,16 @@
 import { FC, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import useSelector from 'store/typedSelector';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import styled from 'styled-components';
 import Navbar from 'components/layout/Navbar';
 import SideDrawer from 'components/layout/SideDrawer';
+import { useSelector } from 'store/reducer';
 import { Logo, DrawerToggle } from '.';
 
 const Layout: FC = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const { darkMode } = useSelector(state => state);
+  const { darkMode } = useSelector(({ session }) => session);
   const history = useHistory();
 
   const theme = useMemo(

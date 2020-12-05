@@ -1,9 +1,9 @@
-import useSelector from 'store/typedSelector';
 import * as Section from 'components/home';
 import { Container } from 'components/shared';
+import { useSelector } from 'store/reducer';
 
 const Home = () => {
-  const { error } = useSelector(state => state);
+  const { error } = useSelector(({ search }) => search);
   if (error) return <Section.Error message={error} />;
   return (
     <>

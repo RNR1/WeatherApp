@@ -1,4 +1,4 @@
-import { getPreferredColorTheme } from 'store/helpers/darkMode';
+import { getPreferredColorTheme } from 'utils/darkMode';
 import City from 'models/City';
 
 export function getInitialTempUnit(): boolean {
@@ -24,8 +24,8 @@ export function getInitialFavorites() {
     if (!cachedFavorites) throw new Error('Cache data not found');
     const parsedFavorites = JSON.parse(cachedFavorites) as City[];
     return parsedFavorites.map(
-      f =>
-        new City(f.name, f.locationKey, f.currentCondition, f.fiveDayForecast)
+      ({ name, locationKey, currentCondition, fiveDayForecast }) =>
+        new City(name, locationKey, currentCondition, fiveDayForecast)
     );
   } catch (error) {
     return [] as City[];

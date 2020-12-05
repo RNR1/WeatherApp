@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
-import { geoPosition } from 'store/actions/root';
+import { geoPosition } from 'store/actions/search.actions';
+import { CLICKABLE } from 'config/consts';
 
 const LocationIcon = () => {
   const [color, setColor] = useState<'primary' | 'error'>(
@@ -28,6 +29,7 @@ const LocationIcon = () => {
   return (
     <Tooltip title={title}>
       <MyLocationIcon
+        style={CLICKABLE}
         aria-label={title}
         color={color}
         onClick={enableLocation}

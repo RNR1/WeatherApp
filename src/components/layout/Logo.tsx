@@ -1,8 +1,8 @@
-import useSelector from 'store/typedSelector';
 import styled from 'styled-components';
+import { useSelector } from 'store/reducer';
 
 const Logo: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-  const { darkMode } = useSelector(state => state);
+  const { darkMode } = useSelector(({ session }) => session);
   return (
     <LogoContainer darkMode={darkMode} className="Logo" onClick={onClick}>
       <span role="img" aria-label="Weather Logo">

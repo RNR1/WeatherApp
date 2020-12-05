@@ -2,12 +2,12 @@ import { AxiosResponse } from 'axios';
 import * as Response from 'api/responses';
 import Temperature from 'models/Temperature';
 
-export interface GeoPositionDto {
+export interface SearchQueryDto {
   name: string;
   locationKey: string;
 }
 
-export interface AutocompleteDto extends GeoPositionDto {
+export interface AutocompleteDto extends SearchQueryDto {
   countryISO: string;
 }
 
@@ -43,7 +43,7 @@ export const FiveDayForecast = ({
 
 export const GeoPosition = ({
   data: { LocalizedName, Key },
-}: AxiosResponse<Response.GeoPosition>): GeoPositionDto => ({
+}: AxiosResponse<Response.GeoPosition>): SearchQueryDto => ({
   name: LocalizedName,
   locationKey: Key,
 });

@@ -1,9 +1,9 @@
-import useSelector from 'store/typedSelector';
 import { Cards, Container, Title } from 'components/shared';
 import { Favorite, NoFavorites } from 'components/favorites';
+import { useSelector } from 'store/reducer';
 
 const Favorites = () => {
-  const favorites = useSelector(state => state.favoriteCities);
+  const favorites = useSelector(({ session }) => session.favoriteCities);
   return (
     <Container elevation={5} square>
       <Title>Favorites</Title>

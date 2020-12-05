@@ -1,12 +1,8 @@
-import { takeEvery, takeLatest } from 'redux-saga/effects';
-import * as Types from 'store/actions/types';
-import * as Sagas from 'store/saga/root';
+import { all, fork } from 'redux-saga/effects';
+import SearchSaga from './search.saga';
+import SessionSaga from './session.saga';
 
 export default function* rootSaga() {
-  yield takeLatest(Types.AUTOCOMPLETE, Sagas.autoCompleteSaga);
-  yield takeLatest(Types.GEOPOSITION, Sagas.geoPositionSaga);
-  yield takeLatest(Types.SEARCH, Sagas.searchSaga);
-  yield takeEvery(Types.TOGGLE_FAVORITE, Sagas.toggleFavoriteSaga);
-  yield takeEvery(Types.TOGGLE_DARK_MODE, Sagas.toggleDarkModeSaga);
-  yield takeEvery(Types.TOGGLE_TEMP_UNIT, Sagas.toggleTempUnitSaga);
+  yield all([fork(SearchSaga)]);
+  yield all([fork(SessionSaga)]);
 }

@@ -1,13 +1,16 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
-import Autocomplete from '@material-ui/core/Autocomplete';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import Autocomplete, {
+  AutocompleteChangeReason,
+  AutocompleteInputChangeReason,
+} from '@material-ui/core/Autocomplete';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { autoComplete, search, clearResults } from 'store/actions/root';
-import useSelector from 'store/typedSelector';
 import { AutocompleteDto } from 'api/transform';
+import * as Actions from 'store/actions/search.actions';
+import { useSelector } from 'store/reducer';
 
 const useStyles = makeStyles({
   option: {
@@ -28,38 +31,45 @@ export default function SearchBar() {
   const dispatch = useDispatch();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const debouncedQuery = useDebounce(searchQuery, 300);
-  const { queryResults, searching, loading, error } = useSelector(
-    state => state
-  );
-  const [selected, setSelected] = useState<AutocompleteDto | null>(
-    queryResults?.[0]
+  const [value, setValue] = useState<AutocompleteDto | null>(null);
+  const q = useDebounce(searchQuery, 300);
+  const { queryResults, searching, error } = useSelector(
+    ({ search }) => search
   );
 
   const resultsAvailable = () => queryResults?.length > 0;
 
-  const submit = () => {
-    if (resultsAvailable()) {
-      dispatch(search(queryResults[0]));
-      setSelected(queryResults[0]);
-    }
+  const submit: (
+    event?: SyntheticEvent<Element, Event>,
+    value?: AutocompleteDto | null,
+    reason?: AutocompleteChangeReason
+  ) => void = (_, newValue, reason) => {
+    if (!newValue || reason !== 'select-option') return;
+    setValue(newValue);
+    dispatch(Actions.searchSubmit(newValue));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') return submit();
+    if (e.key === 'Enter') return submit(e, value);
     if (!isAlphabetic(e.key)) return e.preventDefault();
     return null;
   };
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
-    if (!target.value) return dispatch(clearResults());
-    setSearchQuery(target.value);
+  const handleChange: (
+    event: SyntheticEvent<Element, Event>,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) => void = (_, newValue, reason) => {
+    if (!newValue || reason === 'reset')
+      return dispatch(Actions.clearResults());
+    setSearchQuery(newValue);
     return null;
   };
 
   useEffect(() => {
-    if (debouncedQuery) dispatch(autoComplete(debouncedQuery));
-  }, [debouncedQuery, dispatch]);
+    if (q) dispatch(Actions.autoComplete({ q, value }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q, dispatch]);
 
   if (error) return null;
 
@@ -69,27 +79,29 @@ export default function SearchBar() {
         style={{ width: 300 }}
         options={queryResults}
         autoHighlight
+        autoComplete
+        includeInputInList
+        filterSelectedOptions
         loading={searching}
-        value={selected}
+        value={value}
         classes={{
           option: classes.option,
         }}
         getOptionLabel={option => option?.name}
-        getOptionSelected={(option, value) =>
-          option?.countryISO === value?.countryISO
-        }
         renderOption={(props, option) => (
           <li {...props}>
             <span>{countryToFlag(option?.countryISO)}</span>
             {option?.name}
           </li>
         )}
+        onChange={submit}
+        onInputChange={handleChange}
+        onKeyPress={handleKeyPress}
+        filterOptions={x => x}
         renderInput={params => (
           <TextField
             {...params}
             label="Search location"
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
             variant="outlined"
             inputProps={{
               ...params.inputProps,
@@ -100,10 +112,10 @@ export default function SearchBar() {
       />
       <CustomButton
         disabled={!resultsAvailable() || searching}
-        onClick={submit}
+        onClick={e => submit(e, value)}
         type="button"
       >
-        {loading ? 'Searching...' : 'Search'}
+        {searching ? 'Searching...' : 'Search'}
       </CustomButton>
     </div>
   );

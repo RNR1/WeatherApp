@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import reducer from 'store/reducer/root';
+import reducer from 'store/reducer';
 import rootSaga from 'store/saga';
 
 const configureStore = () => {
@@ -19,8 +19,8 @@ const configureStore = () => {
 const store = configureStore();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./reducer/root.ts', async () => {
-    const newRootReducer = (await import('./reducer/root')).default;
+  module.hot.accept('./reducer', async () => {
+    const newRootReducer = (await import('./reducer')).default;
     store.replaceReducer(newRootReducer);
   });
 }

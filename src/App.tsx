@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 
 import Routes from 'routes/Routes';
 import Layout from 'components/layout/Layout';
-import { search } from 'store/actions/root';
-import { DEFAULT_CITY, DEFAULT_LOCATION_KEY } from 'config/consts';
+import { searchSubmit } from 'store/actions/search.actions';
+import { DEFAULT_QUERY } from 'config/consts';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(search({ name: DEFAULT_CITY, locationKey: DEFAULT_LOCATION_KEY }));
+    dispatch(searchSubmit(DEFAULT_QUERY));
   }, [dispatch]);
 
   return (

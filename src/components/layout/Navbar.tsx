@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { toggleDarkMode, toggleTempUnit } from 'store/actions/root';
-import useSelector from 'store/typedSelector';
+import { toggleDarkMode, toggleTempUnit } from 'store/actions/session.actions';
+import { useSelector } from 'store/reducer';
 import { NavItem, Switch } from '.';
 
 const Navbar: React.FC<{ close?: () => void }> = ({ close }) => {
-  const { darkMode, tempUnit } = useSelector(state => state);
+  const { darkMode, tempUnit } = useSelector(({ session }) => session);
   const dispatch = useDispatch();
 
   return (

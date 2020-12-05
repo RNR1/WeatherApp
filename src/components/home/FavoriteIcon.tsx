@@ -2,9 +2,10 @@ import { useDispatch } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import Favorite from '@material-ui/icons/Favorite';
 import NotFavorite from '@material-ui/icons/FavoriteBorderOutlined';
-import { isFavorite } from 'store/helpers/favorites';
-import { toggleFavorite } from 'store/actions/root';
-import useSelector from 'store/typedSelector';
+import { isFavorite } from 'utils/favorites';
+import { toggleFavorite } from 'store/actions/session.actions';
+import { useSelector } from 'store/reducer';
+import { CLICKABLE } from 'config/consts';
 
 interface Props {
   title?: string;
@@ -16,7 +17,12 @@ const RemoveFromFavorites: React.FC<Props> = ({
   title = 'Remove from favorites',
 }) => (
   <Tooltip title={title}>
-    <Favorite aria-label={title} color="error" onClick={onClick} />
+    <Favorite
+      style={CLICKABLE}
+      aria-label={title}
+      color="error"
+      onClick={onClick}
+    />
   </Tooltip>
 );
 
@@ -25,7 +31,12 @@ const AddToFavorites: React.FC<Props> = ({
   title = 'Add to favorites',
 }) => (
   <Tooltip title={title}>
-    <NotFavorite aria-label={title} color="error" onClick={onClick} />
+    <NotFavorite
+      style={CLICKABLE}
+      aria-label={title}
+      color="error"
+      onClick={onClick}
+    />
   </Tooltip>
 );
 
@@ -33,7 +44,8 @@ const FavoriteIcon = () => {
   const dispatch = useDispatch();
   const handleFavorite = () => dispatch(toggleFavorite());
 
-  const { favoriteCities, currentCity } = useSelector(state => state);
+  const { favoriteCities } = useSelector(({ session }) => session);
+  const { currentCity } = useSelector(({ search }) => search);
 
   return isFavorite(favoriteCities, currentCity!) ? (
     <RemoveFromFavorites onClick={handleFavorite} />

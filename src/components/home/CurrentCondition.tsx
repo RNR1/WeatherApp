@@ -1,12 +1,13 @@
-import useSelector from 'store/typedSelector';
 import Loader from '@material-ui/core/CircularProgress';
 import styled from 'styled-components';
 import { TempIcon, TempUnit } from 'components/shared';
 import FavoriteIcon from 'components/home/FavoriteIcon';
 import LocationIcon from 'components/home/LocationIcon';
+import { useSelector } from 'store/reducer';
 
 const CurrentCondition = () => {
-  const { currentCity, loading } = useSelector(state => state);
+  const { currentCity } = useSelector(({ search }) => search);
+  const { loading } = useSelector(({ session }) => session);
 
   if (loading || !currentCity)
     return (

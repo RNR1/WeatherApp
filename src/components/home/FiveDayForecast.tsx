@@ -1,10 +1,12 @@
 import Loader from '@material-ui/core/CircularProgress';
-import useSelector from 'store/typedSelector';
 import Day from 'components/home/Day';
 import { Title, Cards } from 'components/shared';
+import { useSelector } from 'store/reducer';
 
 const FiveDayForecast = () => {
-  const { currentCity, loading } = useSelector(state => state);
+  const { currentCity } = useSelector(({ search }) => search);
+  const { loading } = useSelector(({ session }) => session);
+
   if (loading || !currentCity)
     return (
       <Cards>
