@@ -12,7 +12,7 @@ function* toggleFavoriteSaga() {
   const updatedFavorites = yield Favorites.isFavorite(favorites, currentCity!)
     ? Favorites.remove(favorites, currentCity!)
     : Favorites.add(favorites, currentCity!);
-  yield cache.set('favorites', updatedFavorites);
+  cache.set('favorites', updatedFavorites);
   yield put(Actions.toggleFavoriteFulfilled(updatedFavorites));
 }
 

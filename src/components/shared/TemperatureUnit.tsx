@@ -1,8 +1,8 @@
+import { useSession } from 'hooks';
 import Temperature from 'models/Temperature';
-import { useSelector } from 'store/reducer';
 
 const TempUnit: React.FC<Partial<Temperature>> = ({ celsius, fahrenheit }) => {
-  const { tempUnit } = useSelector(({ session }) => session);
+  const { tempUnit } = useSession();
 
   return (
     <p>

@@ -1,9 +1,9 @@
 import { Cards, Container, Title } from 'components/shared';
 import { Favorite, NoFavorites } from 'components/favorites';
-import { useSelector } from 'store/reducer';
+import { useSession } from 'hooks';
 
 const Favorites = () => {
-  const favorites = useSelector(({ session }) => session.favoriteCities);
+  const { favoriteCities: favorites } = useSession();
   return (
     <Container elevation={5} square>
       <Title>Favorites</Title>

@@ -1,16 +1,16 @@
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import City from 'models/City';
 import { TempUnit, TempIcon, Card } from 'components/shared';
-import { searchSubmit } from 'store/actions/search.actions';
+
+import { useSearch } from 'hooks';
 
 const Favorite: React.FC<City> = ({ currentCondition, name, locationKey }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const Search = useSearch();
 
   const onClick = (_: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    dispatch(searchSubmit({ name, locationKey }));
+    Search.submit({ name, locationKey });
     history.push('/');
   };
 

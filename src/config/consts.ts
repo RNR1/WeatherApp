@@ -9,3 +9,11 @@ export const DEFAULT_QUERY: SearchQueryDto = {
 };
 
 export const CLICKABLE = { cursor: 'pointer' };
+
+export const AUTOCOMPLETE_PROPS = {
+  style: { width: 300, marginTop: 10 },
+  autoHighlight: true,
+  autoComplete: true,
+  includeInputInList: true,
+  filterSelectedOptions: true,
+};

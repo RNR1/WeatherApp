@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 import API from 'api/client';
 import { AutocompleteDto, SearchQueryDto } from 'api/transform';
 import { autocomplete } from 'api/utils';
@@ -38,7 +38,7 @@ function* searchSaga({ payload }: SearchAction) {
     const [currentCondition, fiveDayForecast]: [
       Temperature,
       Temperature[]
-    ] = yield Promise.all([
+    ] = yield all([
       API.currentCondition(locationKey),
       API.fiveDayForecast(locationKey),
     ]);

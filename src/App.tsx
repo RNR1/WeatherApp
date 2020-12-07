@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import Routes from 'routes/Routes';
 import Layout from 'components/layout/Layout';
-import { searchSubmit } from 'store/actions/search.actions';
+import { useSearch } from 'hooks';
 import { DEFAULT_QUERY } from 'config/consts';
+import Routes from 'routes/Routes';
 
 function App() {
-  const dispatch = useDispatch();
+  const { submit } = useSearch();
 
   useEffect(() => {
-    dispatch(searchSubmit(DEFAULT_QUERY));
-  }, [dispatch]);
+    submit(DEFAULT_QUERY);
+  }, [submit]);
 
   return (
     <Layout>

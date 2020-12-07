@@ -6,11 +6,11 @@ import Autocomplete, {
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { AutocompleteDto } from 'api/transform';
-import * as Actions from 'store/actions/search.actions';
-import { useSelector } from 'store/reducer';
+import { useSearch, useDebounce } from 'hooks';
+import { countryToFlag, isAlphabetic } from 'utils/search';
+import { AUTOCOMPLETE_PROPS } from 'config/consts';
 
 const useStyles = makeStyles({
   option: {
@@ -28,29 +28,24 @@ const useStyles = makeStyles({
 
 export default function SearchBar() {
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   const [searchQuery, setSearchQuery] = useState('');
+  const { searching, error, autoComplete, ...Search } = useSearch();
   const [value, setValue] = useState<AutocompleteDto | null>(null);
   const q = useDebounce(searchQuery, 300);
-  const { queryResults, searching, error } = useSelector(
-    ({ search }) => search
-  );
 
-  const resultsAvailable = () => queryResults?.length > 0;
-
-  const submit: (
+  const handleSubmit: (
     event?: SyntheticEvent<Element, Event>,
     value?: AutocompleteDto | null,
     reason?: AutocompleteChangeReason
   ) => void = (_, newValue, reason) => {
     if (!newValue || reason !== 'select-option') return;
     setValue(newValue);
-    dispatch(Actions.searchSubmit(newValue));
+    Search.submit(newValue);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') return submit(e, value);
+    if (e.key === 'Enter') return handleSubmit(e, value);
     if (!isAlphabetic(e.key)) return e.preventDefault();
     return null;
   };
@@ -60,28 +55,23 @@ export default function SearchBar() {
     value: string,
     reason: AutocompleteInputChangeReason
   ) => void = (_, newValue, reason) => {
-    if (!newValue || reason === 'reset')
-      return dispatch(Actions.clearResults());
+    if (!newValue || reason === 'reset') return Search.clearResults();
     setSearchQuery(newValue);
     return null;
   };
 
   useEffect(() => {
-    if (q) dispatch(Actions.autoComplete({ q, value }));
+    if (q) autoComplete({ q, value });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, dispatch]);
+  }, [q, autoComplete]);
 
   if (error) return null;
 
   return (
     <div className={classes.container}>
       <Autocomplete
-        style={{ width: 300 }}
-        options={queryResults}
-        autoHighlight
-        autoComplete
-        includeInputInList
-        filterSelectedOptions
+        {...AUTOCOMPLETE_PROPS}
+        options={Search.queryResults}
         loading={searching}
         value={value}
         classes={{
@@ -94,7 +84,7 @@ export default function SearchBar() {
             {option?.name}
           </li>
         )}
-        onChange={submit}
+        onChange={handleSubmit}
         onInputChange={handleChange}
         onKeyPress={handleKeyPress}
         filterOptions={x => x}
@@ -111,8 +101,8 @@ export default function SearchBar() {
         )}
       />
       <CustomButton
-        disabled={!resultsAvailable() || searching}
-        onClick={e => submit(e, value)}
+        disabled={!Search.resultsAvailable || searching}
+        onClick={e => handleSubmit(e, value)}
         type="button"
       >
         {searching ? 'Searching...' : 'Search'}
@@ -126,33 +116,3 @@ const CustomButton = styled(Button)`
     display: none;
   }
 `;
-
-function countryToFlag(isoCode: string) {
-  return typeof String.fromCodePoint !== 'undefined'
-    ? isoCode
-        .toUpperCase()
-        .replace(/./g, char =>
-          String.fromCodePoint(char.charCodeAt(0) + 127397)
-        )
-    : isoCode;
-}
-
-function isAlphabetic(key: string) {
-  return /^[a-zA-Z ]*$/.test(key);
-}
-
-function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}

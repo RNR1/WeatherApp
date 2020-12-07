@@ -1,11 +1,9 @@
-import { useDispatch } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import Favorite from '@material-ui/icons/Favorite';
 import NotFavorite from '@material-ui/icons/FavoriteBorderOutlined';
 import { isFavorite } from 'utils/favorites';
-import { toggleFavorite } from 'store/actions/session.actions';
-import { useSelector } from 'store/reducer';
 import { CLICKABLE } from 'config/consts';
+import { useSearch, useSession } from 'hooks';
 
 interface Props {
   title?: string;
@@ -41,16 +39,13 @@ const AddToFavorites: React.FC<Props> = ({
 );
 
 const FavoriteIcon = () => {
-  const dispatch = useDispatch();
-  const handleFavorite = () => dispatch(toggleFavorite());
-
-  const { favoriteCities } = useSelector(({ session }) => session);
-  const { currentCity } = useSelector(({ search }) => search);
+  const { favoriteCities, toggleFavorite } = useSession();
+  const { currentCity } = useSearch();
 
   return isFavorite(favoriteCities, currentCity!) ? (
-    <RemoveFromFavorites onClick={handleFavorite} />
+    <RemoveFromFavorites onClick={toggleFavorite} />
   ) : (
-    <AddToFavorites onClick={handleFavorite} />
+    <AddToFavorites onClick={toggleFavorite} />
   );
 };
 

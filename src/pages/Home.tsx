@@ -1,10 +1,13 @@
+import { lazy } from 'react';
 import * as Section from 'components/home';
-import { Container } from 'components/shared';
-import { useSelector } from 'store/reducer';
+import Container from 'components/shared/StyledPaper';
+import { useSearch } from 'hooks';
+
+const Error = lazy(() => import('components/home/Error'));
 
 const Home = () => {
-  const { error } = useSelector(({ search }) => search);
-  if (error) return <Section.Error message={error} />;
+  const { error } = useSearch();
+  if (error) return <Error message={error} />;
   return (
     <>
       <Section.SearchBar />

@@ -1,13 +1,10 @@
-import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { toggleDarkMode, toggleTempUnit } from 'store/actions/session.actions';
-import { useSelector } from 'store/reducer';
+import { useSession } from 'hooks';
 import { NavItem, Switch } from '.';
 
 const Navbar: React.FC<{ close?: () => void }> = ({ close }) => {
-  const { darkMode, tempUnit } = useSelector(({ session }) => session);
-  const dispatch = useDispatch();
+  const { darkMode, tempUnit, toggleTempUnit, toggleDarkMode } = useSession();
 
   return (
     <Nav darkMode={darkMode}>
@@ -30,7 +27,7 @@ const Navbar: React.FC<{ close?: () => void }> = ({ close }) => {
           <NavItem>
             <Switch
               checked={tempUnit}
-              onChange={() => dispatch(toggleTempUnit())}
+              onChange={toggleTempUnit}
               icons={['C°', 'F°']}
               aria-label={`Current temperature unit: ${
                 tempUnit ? 'fahrenheit' : 'celsius'
@@ -40,7 +37,7 @@ const Navbar: React.FC<{ close?: () => void }> = ({ close }) => {
           <NavItem>
             <Switch
               checked={darkMode}
-              onChange={() => dispatch(toggleDarkMode())}
+              onChange={toggleDarkMode}
               icons={['☀︎', '☾']}
               aria-label="Dark mode"
             />

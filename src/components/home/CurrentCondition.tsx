@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { TempIcon, TempUnit } from 'components/shared';
 import FavoriteIcon from 'components/home/FavoriteIcon';
 import LocationIcon from 'components/home/LocationIcon';
-import { useSelector } from 'store/reducer';
+import { useSession, useSearch } from 'hooks';
 
 const CurrentCondition = () => {
-  const { currentCity } = useSelector(({ search }) => search);
-  const { loading } = useSelector(({ session }) => session);
+  const { currentCity } = useSearch();
+  const { loading } = useSession();
 
   if (loading || !currentCity)
     return (

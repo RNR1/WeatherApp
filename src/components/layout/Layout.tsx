@@ -5,12 +5,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import styled from 'styled-components';
 import Navbar from 'components/layout/Navbar';
 import SideDrawer from 'components/layout/SideDrawer';
-import { useSelector } from 'store/reducer';
-import { Logo, DrawerToggle } from '.';
+import { useSession } from 'hooks';
+import { Logo, DrawerToggle, GlobalStyle } from '.';
 
 const Layout: FC = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const { darkMode } = useSelector(({ session }) => session);
+  const { darkMode } = useSession();
   const history = useHistory();
 
   const theme = useMemo(
@@ -25,6 +25,7 @@ const Layout: FC = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <CssBaseline />
       <SideDrawer
         darkMode={darkMode}

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { useSelector } from 'store/reducer';
+import { useSession } from 'hooks';
 
 const Logo: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-  const { darkMode } = useSelector(({ session }) => session);
+  const { darkMode } = useSession();
   return (
     <LogoContainer darkMode={darkMode} className="Logo" onClick={onClick}>
       <span role="img" aria-label="Weather Logo">
